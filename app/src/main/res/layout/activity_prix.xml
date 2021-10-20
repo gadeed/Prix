@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".activity.PrixActivity">
+
+        <RelativeLayout
+            android:layout_margin="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_back_arrow" />
+
+            <ImageView
+                android:id="@+id/title"
+                android:layout_width="182dp"
+                android:layout_height="20dp"
+                android:src="@drawable/sell_airtime_header"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="34dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="27dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R0"
+                android:textSize="34dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="#175E8C"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_more_button"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="49dp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="15dp"
+            android:textColor="#175E8C"
+            android:layout_marginLeft="27dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current balance" />
+
+        <TextView
+            android:layout_marginTop="36dp"
+            android:textSize="22dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="#175E8C"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Network" />
+
+        <LinearLayout
+            android:background="@drawable/background_outline"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:cardCornerRadius="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/vodacom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:textSize="22dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Vodacom"
+                android:textColor="#175E8C"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_margin="16dp"
+                android:layout_gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_arrow_down"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+            android:layout_marginTop="44dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="32dp"
+            android:id="@+id/cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignItems="center">
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:id="@+id/card1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R5"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R10"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R15"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignItems="center">
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R20"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R25"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R30"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignItems="center">
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R35"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R40"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                app:layout_flexGrow="1"
+                app:toggle_selectedTextColor="@android:color/white"
+                app:toggle_selectedBackgroundColor="#175E8C"
+                app:toggle_padding="14dp"
+                app:toggle_textColor="#172B4D"
+                app:toggle_text="R50"
+                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
+                app:toggle_textSize="18dp"
+                app:toggle_textGravity="center" />
+
+        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+        <RelativeLayout
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

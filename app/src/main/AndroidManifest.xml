@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.flexural.developers.prixapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Prix">
+        <activity android:name=".activity.RemitMoneyActivity"></activity>
+        <activity android:name=".activity.PaymentActivity" />
+        <activity
+            android:name=".activity.ElectricityActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.ElectrictyOptionsActivity" />
+        <activity android:name=".activity.PrixActivity" />
+        <activity android:name=".activity.CodeActivity" />
+        <activity android:name=".activity.RegistrationActivity" />
+        <activity android:name=".activity.PasswordActivity" />
+        <activity android:name=".activity.ConfirmationActivity" />
+        <activity
+            android:name=".activity.DetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.SignupActivity" />
+        <activity android:name=".activity.LoginScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

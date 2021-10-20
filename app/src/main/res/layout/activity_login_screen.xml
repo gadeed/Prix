@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="35dp"
+    android:layout_marginRight="35dp"
+    tools:context=".activity.LoginScreen">
+
+    <RelativeLayout
+        android:layout_marginTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/button_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_close_24"
+            android:layout_margin="6dp"
+            app:tint="#7A7A7A" />
+
+        <TextView
+            android:id="@+id/forgot_password"
+            android:textSize="14dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#7A869A"
+            android:text="Forgot Password?"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_marginTop="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="305dp"
+        android:layout_height="32dp"
+        android:text="Let's Sign you in"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="#172B4D"
+        android:textSize="24dp" />
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="305dp"
+        android:layout_height="24dp"
+        android:text="Welcome back, you've been missed!"
+        android:textColor="#7A869A"
+        android:textSize="14dp"
+        android:fontFamily="@font/montserrat_regular"/>
+
+    <TextView
+        android:fontFamily="@font/montserrat_regular"
+        android:layout_marginTop="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="Phone Number"
+        android:textColor="#C1C7D0"
+        android:textSize="14dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_marginTop="17dp"
+        android:background="@drawable/ic_base"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@drawable/ic___icon___l_1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp" />
+
+        <EditText
+            android:id="@+id/input_number"
+            android:layout_marginLeft="12dp"
+            android:textSize="14dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="#172B4D"
+            android:background="@drawable/ic_base"
+            android:inputType="phone|textAutoCorrect|textAutoComplete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:hint="+27 63 123 4567"
+            android:layout_marginStart="12dp" />
+
+        <ImageView
+            android:src="@drawable/ic___icon___r"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="14dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="14dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:fontFamily="@font/montserrat_regular"
+        android:layout_marginTop="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:textColor="#C1C7D0"
+        android:text="Password" />
+
+    <LinearLayout
+        android:layout_marginTop="17dp"
+        android:background="@drawable/ic_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/ic___icon___l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/input_password"
+            android:hint="Enter Password"
+            android:background="@drawable/ic_base"
+            android:layout_marginLeft="12dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="#172B4D"
+            android:inputType="textPassword"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/button_sign_in"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <RelativeLayout
+        android:id="@+id/button_sign_up"
+        android:background="@drawable/cta"
+        android:layout_width="match_parent"
+        android:layout_height="44dp" />
+
+</LinearLayout>

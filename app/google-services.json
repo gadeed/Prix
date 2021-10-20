@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "539136460444",
+    "firebase_url": "https://prix-48e25-default-rtdb.firebaseio.com",
+    "project_id": "prix-48e25",
+    "storage_bucket": "prix-48e25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539136460444:android:35fcb86ca8e6bf18844f59",
+        "android_client_info": {
+          "package_name": "com.flexural.developers.prixapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539136460444-72qr97s3c5n1n3l68beujd8p4tdc2lc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flexural.developers.prixapp",
+            "certificate_hash": "6813f739a718436303f5bfd2c05fe40be8d56f41"
+          }
+        },
+        {
+          "client_id": "539136460444-e4are63754i2tvd4l3b21h991v4jfrjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi4OKPKOzmTaYQlMVIU2KQe1A1okzNRCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539136460444-e4are63754i2tvd4l3b21h991v4jfrjg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
