@@ -2,6 +2,7 @@ package com.flexural.developers.prixapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.flexural.developers.prixapp.activity.ElectrictyOptionsActivity;
 import com.flexural.developers.prixapp.activity.PaymentActivity;
 import com.flexural.developers.prixapp.activity.PrixActivity;
+import com.flexural.developers.prixapp.activity.ProfileActivity;
 import com.flexural.developers.prixapp.activity.RemitMoneyActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout mButtonPrix, mButtonNetwork, mButtonDataBundles, mButtonElectricity, mButtonPayment;
     private LinearLayout mButtonRemit;
+    private ImageView mButtonProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonElectricity = findViewById(R.id.button_electricity);
         mButtonPayment = findViewById(R.id.button_payment);
         mButtonRemit = findViewById(R.id.button_remit);
+        mButtonProfile = findViewById(R.id.button_profile);
 
         init();
 
@@ -62,5 +66,10 @@ public class MainActivity extends AppCompatActivity {
         mButtonRemit.setOnClickListener(v -> {
             startActivity(new Intent(this, RemitMoneyActivity.class));
         });
+
+        mButtonProfile.setOnClickListener(v -> {
+            startActivity(new Intent(this, ProfileActivity.class));
+        });
+
     }
 }
