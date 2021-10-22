@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_bacjground">
+
+    <TextView
+        android:layout_margin="16dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textColor="#172E8C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Network"
+        android:fontFamily="@font/montserrat_bold" />
+
+    <LinearLayout
+        android:id="@+id/button_mtn"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mtn_logo"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MTN"
+            android:fontFamily="@font/montserrat_bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/button_prix"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prix"
+            android:fontFamily="@font/montserrat_bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_vodacom"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vodacom"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vodacom"
+            android:fontFamily="@font/montserrat_bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

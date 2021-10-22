@@ -90,6 +90,7 @@
                 app:cardCornerRadius="16dp">
 
                 <ImageView
+                    android:id="@+id/network_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/vodacom"/>
@@ -97,6 +98,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/network_title"
                 android:textSize="22dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -108,6 +110,7 @@
                 android:layout_gravity="center_vertical"/>
 
             <ImageView
+                android:id="@+id/drop_down"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_arrow_down"
@@ -116,155 +119,155 @@
 
         </LinearLayout>
 
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+            android:visibility="gone"
+            app:flexWrap="wrap"
             android:layout_marginTop="44dp"
             android:layout_marginLeft="23dp"
             android:layout_marginRight="32dp"
-            android:id="@+id/cards"
+            app:tbgFlow="true"
+            app:tbgRowSpacing="16dp"
+            app:tbgChildSpacing="auto"
+            app:lineSpacing="16dp"
+            app:itemSpacing="16dp"
+            android:id="@+id/prix_airtime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:alignItems="center">
+            app:tbgCheckedButton="@+id/choice_a">
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:id="@+id/card1"
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/choice_a"
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R5"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R5"/>
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R10"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R10"/>
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R15"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R12"/>
 
-        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R15"/>
 
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-            android:layout_marginTop="15dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R20"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R25"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R29"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R30"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R55"/>
+
+        </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+        <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+            android:visibility="gone"
+            app:flexWrap="wrap"
+            android:layout_marginTop="44dp"
             android:layout_marginLeft="23dp"
             android:layout_marginRight="32dp"
+            app:tbgFlow="true"
+            app:tbgRowSpacing="16dp"
+            app:tbgChildSpacing="auto"
+            app:lineSpacing="16dp"
+            app:itemSpacing="16dp"
+            android:id="@+id/mtn_airtime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:alignItems="center">
+            app:tbgCheckedButton="@+id/choice_a">
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R20"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R5"/>
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R25"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R10"/>
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R30"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R15"/>
 
-        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R30"/>
 
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-            android:layout_marginTop="15dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R60"/>
+
+        </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+        <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+            android:visibility="gone"
+            app:flexWrap="wrap"
+            android:layout_marginTop="44dp"
             android:layout_marginLeft="23dp"
             android:layout_marginRight="32dp"
+            app:tbgFlow="true"
+            app:tbgRowSpacing="16dp"
+            app:tbgChildSpacing="auto"
+            app:lineSpacing="16dp"
+            app:itemSpacing="16dp"
+            android:id="@+id/vodacom_airtime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:alignItems="center">
+            app:tbgCheckedButton="@+id/choice_a">
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R35"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R5"/>
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R40"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R10"/>
 
-            <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                android:layout_width="0dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_flexGrow="1"
-                app:toggle_selectedTextColor="@android:color/white"
-                app:toggle_selectedBackgroundColor="#175E8C"
-                app:toggle_padding="14dp"
-                app:toggle_textColor="#172B4D"
-                app:toggle_text="R50"
-                app:toggle_fontFamily="/fonts/montserrat_bold.ttf"
-                app:toggle_textSize="18dp"
-                app:toggle_textGravity="center" />
+                android:text="R12"/>
 
-        </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R29"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R55"/>
+
+        </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
 
         <RelativeLayout
             android:layout_marginTop="34dp"
