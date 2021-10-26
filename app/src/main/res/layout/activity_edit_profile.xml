@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.EditProfileActivity">
+
+    <RelativeLayout
+        android:layout_margin="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow" />
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_profile" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background_outline"
+        android:layout_marginTop="54dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#175E8C"
+                android:textSize="17dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full name" />
+
+            <TextView
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="#7a7a7a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="John Doe" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:background="@drawable/background_outline"
+        android:layout_marginTop="54dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_phone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#175E8C"
+                android:textSize="17dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number" />
+
+            <TextView
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="#7a7a7a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+27 63 149 0446" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:background="@drawable/background_outline"
+        android:layout_marginTop="54dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_merchant" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#175E8C"
+                android:textSize="17dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Merchant Number" />
+
+            <TextView
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="#7a7a7a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123456789" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:background="@drawable/background_outline"
+        android:layout_marginTop="54dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_birthday" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#175E8C"
+                android:textSize="17dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth" />
+
+            <TextView
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="#7a7a7a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="John Doe" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:background="@drawable/background_outline"
+        android:layout_marginTop="54dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_email" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#175E8C"
+                android:textSize="17dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <TextView
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="#7a7a7a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="johndoe@gmail.com" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:background="@drawable/background_outline"
+        android:layout_marginTop="54dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_location" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#175E8C"
+                android:textSize="17dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address" />
+
+            <TextView
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="#7a7a7a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123 Street, Town, City, Province, Country" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

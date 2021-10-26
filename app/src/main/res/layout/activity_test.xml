@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_blutetooth_printer_demo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_margin="8dp"
+                    android:id="@+id/btn_load_bluetoothPrinter"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load_bluetoothPrinter" />
+
+                <Button
+                    android:id="@+id/btn_printer_init"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/printer_init" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_printer_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/printer_test" />
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/btn_leftMargin_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_leftMargin" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_printArea_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_area" />
+
+                <Button
+                    android:id="@+id/btn_rightSpce_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_rightSpace" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_alignMode_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_align" />
+
+                <Button
+                    android:id="@+id/btn_relativePosition_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_relative" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_absolute_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_absolute" />
+
+                <Button
+                    android:id="@+id/btn_tab_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_tab" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_underline_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_underline" />
+
+
+                <Button
+                    android:id="@+id/btn_bmp_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_bmp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_barcode_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_barcode" />
+
+                <Button
+                    android:id="@+id/btn_QRcode_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_QRcode" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_raster_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_raster" />
+
+                <Button
+                    android:id="@+id/btn_koubei_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_koubei_bill" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_baidu_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_baidu_bill" />
+
+                <Button
+                    android:id="@+id/btn_meituan_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_meituan_bill" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_elemo_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_elemo_bill" />
+
+                <Button
+                    android:id="@+id/btn_multiThread_test"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/print_Multithread_test" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_exit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exit" />
+
+            </LinearLayout>
+
+            <TextView
+                android:textAlignment="center"
+                android:layout_margin="16dp"
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

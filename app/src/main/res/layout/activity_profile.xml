@@ -24,6 +24,7 @@
                 android:layout_gravity="right" />
 
             <LinearLayout
+                android:id="@+id/edit_profile"
                 android:layout_marginTop="47dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -60,6 +61,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/button_topup"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -88,6 +90,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/button_transfer"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -116,6 +119,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/button_sales"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -200,6 +204,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/button_device"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -277,6 +282,7 @@
             app:tint="@color/white" />
 
         <ImageView
+            android:id="@+id/button_dashboard"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -285,6 +291,7 @@
             app:tint="#7A7A7A" />
 
         <ImageView
+            android:id="@+id/button_setting"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

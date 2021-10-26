@@ -65,6 +65,7 @@
             android:text="Current balance" />
 
         <TextView
+            android:id="@+id/select_network"
             android:layout_marginTop="36dp"
             android:textSize="22dp"
             android:layout_marginLeft="15dp"
@@ -76,6 +77,7 @@
             android:text="Select Network" />
 
         <LinearLayout
+            android:id="@+id/network_container"
             android:background="@drawable/background_outline"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -181,6 +183,11 @@
                 android:layout_height="80dp"
                 android:text="R55"/>
 
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R60"/>
+
         </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
 
         <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
@@ -223,6 +230,11 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:text="R60"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R100"/>
 
         </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
 
@@ -267,9 +279,101 @@
                 android:layout_height="80dp"
                 android:text="R55"/>
 
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R110"/>
+
+        </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+        <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+            android:visibility="gone"
+            app:flexWrap="wrap"
+            android:layout_marginTop="44dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="32dp"
+            app:tbgFlow="true"
+            app:tbgRowSpacing="16dp"
+            app:tbgChildSpacing="auto"
+            app:lineSpacing="16dp"
+            app:itemSpacing="16dp"
+            android:id="@+id/cellc_airtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tbgCheckedButton="@+id/choice_a">
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R5"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R10"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R25"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R50"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R100"/>
+
+        </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+        <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+            android:visibility="gone"
+            app:flexWrap="wrap"
+            android:layout_marginTop="44dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="32dp"
+            app:tbgFlow="true"
+            app:tbgRowSpacing="16dp"
+            app:tbgChildSpacing="auto"
+            app:lineSpacing="16dp"
+            app:itemSpacing="16dp"
+            android:id="@+id/telkom_airtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tbgCheckedButton="@+id/choice_a">
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R5"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R10"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R20"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R50"/>
+
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="R100"/>
+
         </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
 
         <RelativeLayout
+            android:id="@+id/button_buy"
             android:layout_marginTop="34dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"

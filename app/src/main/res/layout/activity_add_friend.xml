@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.AddFriendActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:padding="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan or Enter Code"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="33dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="#175E8C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shop Code" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginRight="4dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_merchant" />
+
+        <TextView
+            android:id="@+id/phone_number"
+            android:inputType="phone"
+            android:textColorHint="#175E8C"
+            android:layout_marginLeft="6dp"
+            android:padding="8dp"
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Enter Shop Code"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:background="#16110D"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_bg"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD FRIEND"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
