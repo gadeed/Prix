@@ -14,6 +14,8 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStructure;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -50,14 +52,15 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
             "Prix Airtime", "Network Airtime", "Data Bundles", "Electricity", "Payment", "Remit Money"
     };
 
-    private TextView mSerialNumber;
-    private LinearLayout mLayoutDevice, mLayoutTopUp, mLayoutTransfer;
+    private TextView mSerialNumber, mTitle;
+    private LinearLayout mLayoutDevice, mLayoutTopUp, mLayoutTransfer, mLayoutHelpCenter;
     private PDFView mPdfView;
     private CardView mButtonAddFriend, mShareCode;
-    private RelativeLayout mLayoutSales;
+    private RelativeLayout mLayoutSales, mButtonTicket;
     private PieChart chart;
     private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
+    private ImageView mButtonBack;
 
     String pdfFileName;
     protected Typeface tfRegular, tfLight;
@@ -83,6 +86,11 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
         seekBarX = findViewById(R.id.seekBar1);
         seekBarY = findViewById(R.id.seekBar2);
         chart = findViewById(R.id.chart1);
+        mButtonBack = findViewById(R.id.button_back);
+        mTitle = findViewById(R.id.title);
+        mLayoutHelpCenter = findViewById(R.id.layout_help_center);
+
+        mButtonTicket = findViewById(R.id.button_ticket);
 
         seekBarX.setOnSeekBarChangeListener(this);
         seekBarY.setOnSeekBarChangeListener(this);
@@ -90,9 +98,13 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
         tfRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         tfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
 
-
+        init();
         receiveIntent();
 
+    }
+
+    private void init() {
+        mButtonBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void receiveIntent() {
@@ -107,15 +119,22 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
             }
 
             mSerialNumber.setText(serialNumber);
+            mTitle.setText("Devices");
 
         } else if (menu.equals("topup")) {
             mLayoutTopUp.setVisibility(View.VISIBLE);
             displayFromAsset(SAMPLE_FILE);
 
+            mTitle.setText("Top Up");
+
+
         } else if (menu.equals("transfer")) {
             mLayoutTransfer.setVisibility(View.VISIBLE);
+            mTitle.setText("Transfers");
+
             mButtonAddFriend.setOnClickListener(v -> {
-                startActivity(new Intent(this, ExtraActivity.class));
+                Intent intent1 = new Intent(this, AddFriendActivity.class);
+                startActivity(intent1);
             });
 
             mShareCode.setOnClickListener(v -> {
@@ -130,6 +149,7 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
 
         } else if (menu.equals("sales")) {
             mLayoutSales.setVisibility(View.VISIBLE);
+            mTitle.setText("Sales");
 
             chart.setUsePercentValues(true);
             chart.getDescription().setEnabled(false);
@@ -181,6 +201,17 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
             chart.setEntryLabelColor(Color.WHITE);
             chart.setEntryLabelTypeface(tfRegular);
             chart.setEntryLabelTextSize(12f);
+
+        } else if (menu.equals("help_center")) {
+            mTitle.setText("Help Center");
+            mLayoutHelpCenter.setVisibility(View.VISIBLE);
+
+            mButtonTicket.setOnClickListener(v -> {
+                Intent intent1 = new Intent(this, ExtraActivity.class);
+                intent1.putExtra("extra", "ticket");
+                startActivity(intent1);
+            });
+
         }
     }
 

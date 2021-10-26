@@ -15,6 +15,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,9 +77,9 @@ public class DetailsActivity extends AppCompatActivity {
     private final static String KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string";
 
     private RelativeLayout mButtonNext;
-    private TextView mPhoneNumber, mEmailAddress, mBirthday;
+    private TextView mPhoneNumber, mEmailAddress;
     private EditText mInputName, mInputSurname, mInputStreet, mInputCity, mInputCountry;
-    private CheckBox mTermsCondition;
+    private ImageView mButtonBack;
 
     private String userId, currentDateTime, mLastUpdateTime, longitude, latitude, locationAddress;
     private int day, month, year;
@@ -110,8 +111,7 @@ public class DetailsActivity extends AppCompatActivity {
         mInputCity = findViewById(R.id.input_city);
         mInputCountry = findViewById(R.id.input_country);
 
-        mBirthday = findViewById(R.id.birthday);
-        mTermsCondition = findViewById(R.id.checkbox);
+        mButtonBack = findViewById(R.id.button_back);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -169,32 +169,9 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mBirthday.setOnClickListener(v -> {
-            DatePickerDialog datePicker = new DatePickerDialog(DetailsActivity.this,
-                    (view1, year, month, dayOfMonth) -> {
-                        if (dayOfMonth < 9 && (month + 1) < 9){
-                            mBirthday.setText("0" + dayOfMonth + "/" + "0" + (month + 1) + "/" + year);
-
-                        } else if (dayOfMonth < 9 && (month + 1) > 9){
-                            mBirthday.setText("0" + dayOfMonth + "/" + (month + 1) + "/" + year);
-
-                        } else if (dayOfMonth > 9 && (month + 1) < 9){
-                            mBirthday.setText(dayOfMonth + "/" + "0" + (month + 1) + "/" + year);
-
-                        } else {
-                            mBirthday.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-
-                        }
-
-                    }, year, month, day);
-
-            datePicker.show();
-        });
-
         mButtonNext.setOnClickListener(v -> {
             if (mInputName.length() > 0 && mInputSurname.length() > 0 && mInputStreet.length() > 0 &&
-            mInputCity.length() > 0 && mInputCountry.length() > 0 && mBirthday.length() > 0 &&
-            mTermsCondition.isChecked()) {
+            mInputCity.length() > 0 && mInputCountry.length() > 0) {
                 progressDialog.setMessage("Uploading information...");
                 progressDialog.show();
 
@@ -204,7 +181,6 @@ public class DetailsActivity extends AppCompatActivity {
                 hashMap.put("street", mInputStreet.getText().toString());
                 hashMap.put("city", mInputCity.getText().toString());
                 hashMap.put("country", mInputCountry.getText().toString());
-                hashMap.put("birthday", mBirthday.getText().toString());
 
                 mProfileRef.child(userId).updateChildren(hashMap)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -236,14 +212,10 @@ public class DetailsActivity extends AppCompatActivity {
             } else if (mInputCountry.length() == 0) {
                 Toast.makeText(this, "Please Enter Country of Residence", Toast.LENGTH_SHORT).show();
 
-            } else if (mBirthday.length() == 0) {
-                Toast.makeText(this, "Please Enter Birthday", Toast.LENGTH_SHORT).show();
-
-            } else if (!mTermsCondition.isChecked()) {
-                Toast.makeText(this, "Please Accept Terms & Conditions", Toast.LENGTH_SHORT).show();
-
             }
         });
+
+        mButtonBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void updateValuesFromBundle(Bundle savedInstanceState) {

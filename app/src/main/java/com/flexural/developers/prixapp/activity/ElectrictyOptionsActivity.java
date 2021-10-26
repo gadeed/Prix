@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.flexural.developers.prixapp.R;
@@ -11,6 +12,7 @@ import com.flexural.developers.prixapp.R;
 public class ElectrictyOptionsActivity extends AppCompatActivity {
 
     private RelativeLayout mButtonUniPin, mButtonPinless;
+    private ImageView mButtonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,7 @@ public class ElectrictyOptionsActivity extends AppCompatActivity {
 
         mButtonUniPin = findViewById(R.id.button_unipin);
         mButtonPinless = findViewById(R.id.button_pinless);
+        mButtonBack = findViewById(R.id.button_back);
 
         init();
 
@@ -35,5 +38,8 @@ public class ElectrictyOptionsActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ElectricityActivity.class);
             startActivity(intent);
         });
+
+        mButtonBack.setOnClickListener(v -> onBackPressed());
+
     }
 }

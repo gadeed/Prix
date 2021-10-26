@@ -8,16 +8,19 @@
     tools:context=".activity.EditProfileActivity">
 
     <RelativeLayout
-        android:layout_margin="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/button_back"
+            android:layout_centerVertical="true"
+            android:padding="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back_arrow" />
 
         <ImageView
+            android:padding="14dp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,45 +142,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123456789" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="8dp"
-        android:background="@drawable/background_outline"
-        android:layout_marginTop="54dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:padding="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_birthday" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:textColor="#175E8C"
-                android:textSize="17dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date of Birth" />
-
-            <TextView
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:textColor="#7a7a7a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="John Doe" />
 
         </LinearLayout>
 

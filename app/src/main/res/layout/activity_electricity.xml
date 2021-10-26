@@ -13,15 +13,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="14dp">
+            android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/button_back"
+                android:padding="14dp"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_back_arrow" />
 
             <ImageView
+                android:padding="14dp"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_centerHorizontal="true"

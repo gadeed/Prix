@@ -28,7 +28,7 @@ import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
 
 public class PrixActivity extends AppCompatActivity {
 
-    private ImageView mTitle, mDropDown, mNetworkLogo;
+    private ImageView mTitle, mDropDown, mNetworkLogo, mButtonBack;
     private LinearLayout mButtonMtn, mButtonPrix, mButtonVodacom, mNetworkContainer, mButtonCellC, mButtonTelkom;
     private TextView mNetworkTitle, mSelectNetwork;
     private SingleSelectToggleGroup mPrixAirtime, mMtnAirtime, mVodacomAirtime, mCellCAirtime, mTelkomAirtime;
@@ -52,6 +52,7 @@ public class PrixActivity extends AppCompatActivity {
         mButtonBuy = findViewById(R.id.button_buy);
         mCellCAirtime = findViewById(R.id.cellc_airtime);
         mTelkomAirtime = findViewById(R.id.telkom_airtime);
+        mButtonBack = findViewById(R.id.button_back);
 
         init();
         receiveIntent();
@@ -85,6 +86,9 @@ public class PrixActivity extends AppCompatActivity {
             dialog.getWindow().setGravity(Gravity.CENTER);
 
         });
+
+        mButtonBack.setOnClickListener(v -> onBackPressed());
+
     }
 
     private void printReceipt() {

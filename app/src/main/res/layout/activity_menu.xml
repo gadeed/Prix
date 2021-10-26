@@ -7,6 +7,28 @@
     android:orientation="vertical"
     tools:context=".activity.MenuActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow"
+            android:padding="16dp"
+            android:id="@+id/button_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="Title"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_centerInParent="true"
+            android:id="@+id/title"/>
+
+    </RelativeLayout>
+
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/layout_device"
@@ -210,6 +232,49 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/layout_help_center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FAQ"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="22dp"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+        <RelativeLayout
+            android:id="@+id/button_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/ic_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create a Ticket"
+                android:textSize="17dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

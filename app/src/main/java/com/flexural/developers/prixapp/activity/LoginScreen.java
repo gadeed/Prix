@@ -60,7 +60,7 @@ public class LoginScreen extends AppCompatActivity {
 
     private void init() {
         mButtonClose.setOnClickListener(v -> {
-            Toast.makeText(this, "Exit the App comes here", Toast.LENGTH_SHORT).show();
+            onBackPressed();
         });
 
         mButtonSignIn.setOnClickListener(v -> {

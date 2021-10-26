@@ -3,6 +3,7 @@ package com.flexural.developers.prixapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class PasswordActivity extends AppCompatActivity {
     private PinEntryEditText mInputPassword, mConfirmPassword;
     private RelativeLayout mButtonNext;
     private LinearLayout mMainLayout;
+    private ImageView mButtonBack;
 
     private String userId;
     private AuthUtils authUtils;
@@ -51,6 +53,7 @@ public class PasswordActivity extends AppCompatActivity {
         mConfirmPassword = findViewById(R.id.confirm_password);
         mButtonNext = findViewById(R.id.button_next);
         mMainLayout = findViewById(R.id.main_layout);
+        mButtonBack = findViewById(R.id.button_back);
 
         mAuth = FirebaseAuth.getInstance();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -125,6 +128,8 @@ public class PasswordActivity extends AppCompatActivity {
 
             }
         });
+
+        mButtonBack.setOnClickListener(v -> onBackPressed());
 
     }
 

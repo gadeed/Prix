@@ -13,6 +13,7 @@ import com.flexural.developers.prixapp.R;
 
 public class ProfileActivity extends AppCompatActivity {
     private LinearLayout mEditProfile, mButtonDevice, mButtonTopup, mButtonTransfer, mButtonSales;
+    private LinearLayout mButtonHelpCenter;
     private ImageView mButtonDashboard, mButtonSettings;
 
     @Override
@@ -27,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
         mButtonSettings = findViewById(R.id.button_setting);
         mButtonTransfer = findViewById(R.id.button_transfer);
         mButtonSales = findViewById(R.id.button_sales);
+        mButtonHelpCenter = findViewById(R.id.button_help_center);
 
         init();
 
@@ -68,5 +70,12 @@ public class ProfileActivity extends AppCompatActivity {
             intent.putExtra("menu", "sales");
             startActivity(intent);
         });
+
+        mButtonHelpCenter.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MenuActivity.class);
+            intent.putExtra("menu", "help_center");
+            startActivity(intent);
+        });
+
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class SignupActivity extends AppCompatActivity {
     private CheckBox mTermsCondition;
     private EditText mInputPhone, mInputEmail;
     private LinearLayout mMainLayout;
+    private ImageView mButtonBack;
 
 
     @Override
@@ -67,6 +69,9 @@ public class SignupActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please Accept Terms & Conditions", Toast.LENGTH_LONG).show();
             }
         });
+
+        mButtonBack.setOnClickListener(v -> onBackPressed());
+
     }
 
     private boolean validate(String emailStr) {
