@@ -28,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void init() {
         mButtonNext.setOnClickListener(v -> {
-            startActivity(new Intent(this, SignupActivity.class));
+            startActivity(new Intent(this, DetailsActivity.class));
         });
 
         mButtonBack.setOnClickListener(v -> {

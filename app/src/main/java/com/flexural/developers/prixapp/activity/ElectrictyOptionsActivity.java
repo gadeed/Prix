@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.flexural.developers.prixapp.R;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ElectrictyOptionsActivity extends AppCompatActivity {
 
@@ -35,8 +37,13 @@ public class ElectrictyOptionsActivity extends AppCompatActivity {
         });
 
         mButtonPinless.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ElectricityActivity.class);
-            startActivity(intent);
+            Snackbar.make(findViewById(android.R.id.content), "Pinless Meter Service Not Available at the Moment", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    }).show();
         });
 
         mButtonBack.setOnClickListener(v -> onBackPressed());

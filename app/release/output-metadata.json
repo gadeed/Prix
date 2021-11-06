@@ -8,11 +8,16 @@
   "variantName": "processReleaseResources",
   "elements": [
     {
-      "type": "SINGLE",
-      "filters": [],
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "armeabi-v7a"
+        }
+      ],
       "versionCode": 1,
       "versionName": "1.0",
-      "outputFile": "app-release.apk"
+      "outputFile": "app-armeabi-v7a-release.apk"
     }
   ]
 }

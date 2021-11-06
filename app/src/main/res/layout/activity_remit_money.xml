@@ -15,13 +15,14 @@
         android:src="@drawable/ic_remit_header" />
 
     <LinearLayout
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="64dp"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/button_mama_money"
             android:layout_margin="35dp"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
@@ -32,6 +33,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/button_ecocash"
             android:layout_margin="35dp"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/button_hello_paisa"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:layout_width="88dp"
@@ -60,6 +63,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/button_remit_money"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:layout_width="88dp"

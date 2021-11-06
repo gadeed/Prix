@@ -183,6 +183,8 @@ public class PrixActivity extends AppCompatActivity {
 
         if (title.equals("unipin")) {
             Glide.with(this).load(R.drawable.ic_unipin_title).into(mTitle);
+            mNetworkContainer.setVisibility(View.GONE);
+            mSelectNetwork.setVisibility(View.GONE);
 
         } else if (title.equals("prix")){
             mDropDown.setVisibility(View.INVISIBLE);

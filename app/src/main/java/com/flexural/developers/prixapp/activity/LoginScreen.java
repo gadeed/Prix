@@ -10,8 +10,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.flexural.developers.prixapp.MainActivity;
 import com.flexural.developers.prixapp.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -22,16 +30,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginScreen extends AppCompatActivity {
 
     private ImageView mButtonClose;
-    private EditText mInputNumber, mInputPassword;
+    private EditText mInputEmail, mInputPassword;
     private RelativeLayout mButtonSignIn, mButtonSignUp;
 
-    private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
+    private String email, password;
 
-    private DatabaseReference mProfileRef;
+    private String URL = "http://10.198.75.11/prix/login.php";
 
 
     @Override
@@ -42,19 +53,15 @@ public class LoginScreen extends AppCompatActivity {
         mButtonClose = findViewById(R.id.button_close);
         mButtonSignIn = findViewById(R.id.button_sign_in);
         mButtonSignUp = findViewById(R.id.button_sign_up);
-        mInputNumber = findViewById(R.id.input_number);
+        mInputEmail = findViewById(R.id.input_email);
         mInputPassword = findViewById(R.id.input_password);
 
+        email = password = "";
+
         progressDialog = new ProgressDialog(LoginScreen.this);
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-
-        mAuth = FirebaseAuth.getInstance();
-
-        mProfileRef = FirebaseDatabase.getInstance().getReference().child("prix").child("profile");
+        progressDialog.setMessage("Login...");
 
         init();
-        getData();
 
     }
 
@@ -64,14 +71,49 @@ public class LoginScreen extends AppCompatActivity {
         });
 
         mButtonSignIn.setOnClickListener(v -> {
-            if (mInputNumber.length() == 10 && mInputPassword.length() == 6) {
-                String phoneNumber = "+27" + mInputNumber.getText().toString().substring(1);
+            email = mInputEmail.getText().toString().trim();
+            password = mInputPassword.getText().toString().trim();
 
-                Intent intent = new Intent(LoginScreen.this, CodeActivity.class);
-                intent.putExtra("phoneNumber", phoneNumber);
-                startActivity(intent);
+            if (!email.equals("") && !password.equals("")) {
+                progressDialog.show();
 
-            } else if (mInputNumber.length() != 10){
+                StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equals("success")) {
+                            progressDialog.dismiss();
+                            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        } else if (response.equals("failure")) {
+                            progressDialog.dismiss();
+                            Snackbar.make(findViewById(android.R.id.content), "Invalid Login Id/Password", Snackbar.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Snackbar.make(findViewById(android.R.id.content), error.toString().trim(), Snackbar.LENGTH_SHORT).show();
+
+                    }
+                }){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> data = new HashMap<>();
+                        data.put("email", email);
+                        data.put("password", password);
+                        return data;
+
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(request);
+
+            } else if (mInputEmail.length() == 0){
                 Snackbar.make(findViewById(android.R.id.content), "Invalid Phone Number", Snackbar.LENGTH_INDEFINITE)
                         .setAction("OK", new View.OnClickListener() {
                             @Override
@@ -79,7 +121,7 @@ public class LoginScreen extends AppCompatActivity {
 
                             }
                         });
-            } else if (mInputPassword.length() != 6) {
+            } else if (mInputPassword.length() == 0) {
                 Snackbar.make(findViewById(android.R.id.content), "Invalid Password", Snackbar.LENGTH_INDEFINITE)
                         .setAction("OK", new View.OnClickListener() {
                             @Override
@@ -97,52 +139,4 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    private void getData() {
-        if (mAuth.getCurrentUser() != null) {
-            mProfileRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
-                        if (snapshot.child(mAuth.getCurrentUser().getUid()).hasChild("account")) {
-                            progressDialog.dismiss();
-
-                            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-
-                        } else if (snapshot.child(mAuth.getCurrentUser().getUid()).hasChild("email")){
-                            progressDialog.dismiss();
-
-                            Intent intent = new Intent(LoginScreen.this, ConfirmationActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-
-                        } else {
-                            progressDialog.dismiss();
-
-                            Intent intent = new Intent(LoginScreen.this, PasswordActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-
-                        }
-
-                    } else {
-                        progressDialog.dismiss();
-
-                        Intent intent = new Intent(LoginScreen.this, DetailsActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        } else {
-            progressDialog.dismiss();
-
-        }
-    }
 }

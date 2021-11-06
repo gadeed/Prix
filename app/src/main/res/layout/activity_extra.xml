@@ -262,7 +262,6 @@
             android:textSize="17dp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:layout_width="match_parent"
-            android:="1"
             android:layout_height="wrap_content"
             android:text="Enter body"
             android:background="@color/white"/>

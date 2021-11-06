@@ -83,24 +83,24 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:src="@drawable/ic___icon___l_1"
+            android:src="@drawable/ic_email"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="12dp" />
 
         <EditText
-            android:id="@+id/input_number"
+            android:id="@+id/input_email"
             android:layout_marginLeft="12dp"
             android:textSize="14dp"
             android:fontFamily="@font/montserrat_medium"
             android:textColor="#172B4D"
             android:background="@drawable/ic_base"
-            android:inputType="phone|textAutoCorrect|textAutoComplete"
+            android:inputType="textEmailAddress|textAutoCorrect|textAutoComplete"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:hint="+27 63 123 4567"
+            android:hint="Enter Email"
             android:layout_marginStart="12dp" />
 
         <ImageView

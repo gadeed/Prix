@@ -90,7 +90,7 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_phone" />
 
-            <TextView
+            <EditText
                 android:id="@+id/phone_number"
                 android:inputType="phone"
                 android:textColorHint="#175E8C"
@@ -102,57 +102,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="+27 63 123 4567"
-                android:background="@color/white"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:background="#16110D"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:textSize="12dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginLeft="33dp"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textColor="#175E8C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email address" />
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginRight="4dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_email" />
-
-            <TextView
-                android:id="@+id/email_address"
-                android:inputType="phone"
-                android:textColorHint="#175E8C"
-                android:layout_marginLeft="6dp"
-                android:padding="8dp"
-                android:textColor="#175E8C"
-                android:textSize="17dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="yourmail@gmail.com"
+                android:hint="Enter Phone Number"
                 android:background="@color/white"/>
 
         </LinearLayout>
@@ -253,156 +203,6 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:hint="Enter last name"
-                android:background="@color/white"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:background="#16110D"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:textSize="12dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginLeft="33dp"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textColor="#175E8C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Street address" />
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginRight="4dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_location" />
-
-            <EditText
-                android:id="@+id/input_street"
-                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                android:textColorHint="#175E8C"
-                android:layout_marginLeft="6dp"
-                android:padding="8dp"
-                android:textColor="#175E8C"
-                android:textSize="17dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:hint="Enter street address"
-                android:background="@color/white"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:background="#16110D"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:textSize="12dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginLeft="33dp"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textColor="#175E8C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="City" />
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginRight="4dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_city" />
-
-            <EditText
-                android:id="@+id/input_city"
-                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                android:textColorHint="#175E8C"
-                android:layout_marginLeft="6dp"
-                android:padding="8dp"
-                android:textColor="#175E8C"
-                android:textSize="17dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:hint="Enter city"
-                android:background="@color/white"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:background="#16110D"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:textSize="12dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginLeft="33dp"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textColor="#175E8C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Country of residence" />
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginRight="4dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_country" />
-
-            <EditText
-                android:id="@+id/input_country"
-                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                android:textColorHint="#175E8C"
-                android:layout_marginLeft="6dp"
-                android:padding="8dp"
-                android:textColor="#175E8C"
-                android:textSize="17dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:hint="Enter country of residence"
                 android:background="@color/white"/>
 
         </LinearLayout>

@@ -54,7 +54,6 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
 
     private TextView mSerialNumber, mTitle;
     private LinearLayout mLayoutDevice, mLayoutTopUp, mLayoutTransfer, mLayoutHelpCenter;
-    private PDFView mPdfView;
     private CardView mButtonAddFriend, mShareCode;
     private RelativeLayout mLayoutSales, mButtonTicket;
     private PieChart chart;
@@ -74,7 +73,6 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
 
         mSerialNumber = findViewById(R.id.serial_number);
         mLayoutDevice = findViewById(R.id.layout_device);
-        mPdfView = findViewById(R.id.pdfView);
         mButtonAddFriend = findViewById(R.id.button_add_friend);
         mShareCode = findViewById(R.id.button_qr_code);
         mLayoutTopUp = findViewById(R.id.layout_topup);
@@ -123,7 +121,6 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
 
         } else if (menu.equals("topup")) {
             mLayoutTopUp.setVisibility(View.VISIBLE);
-            displayFromAsset(SAMPLE_FILE);
 
             mTitle.setText("Top Up");
 
@@ -269,21 +266,6 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
         chart.highlightValues(null);
 
         chart.invalidate();
-    }
-
-    private void displayFromAsset(String assetFileName) {
-        pdfFileName = assetFileName;
-
-        mPdfView.fromAsset(SAMPLE_FILE)
-                .defaultPage(0)
-                .onPageChange(this)
-                .enableAnnotationRendering(true)
-                .onLoad(this)
-                .scrollHandle(new DefaultScrollHandle(this))
-                .spacing(10) // in dp
-                .onPageError(this)
-//                .pageFitPolicy(FitPolicy.BOTH)
-                .load();
     }
 
     @Override
