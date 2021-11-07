@@ -53,9 +53,9 @@
             android:layout_height="30dp"
             android:src="@drawable/ic_merchant" />
 
-        <TextView
-            android:id="@+id/phone_number"
-            android:inputType="phone"
+        <EditText
+            android:id="@+id/shop_code"
+            android:inputType="textCapCharacters|textAutoCorrect|textAutoComplete"
             android:textColorHint="#175E8C"
             android:layout_marginLeft="6dp"
             android:padding="8dp"
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Enter Shop Code"
+            android:hint="Enter Shop Code"
             android:background="@color/white"/>
 
     </LinearLayout>
@@ -79,6 +79,7 @@
         android:layout_marginTop="10dp" />
 
     <RelativeLayout
+        android:id="@+id/add_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_bg"
@@ -89,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD FRIEND"
+            android:text="ADD SHOP CODE"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/white"
             android:textSize="17dp"

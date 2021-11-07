@@ -28,7 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView mButtonDashboard, mButtonSettings;
     private TextView mUsername;
 
-    private String URL = "http://10.198.75.11/prix/personalInfo.php";
+    private String URL = "http://192.168.137.1/prix/personalInfo.php";
+    private String shopName;
 
 
     @Override
@@ -52,6 +53,42 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void getData(){
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String firstName = object.getString("first_name");
+                        String lastName = object.getString("last_name");
+                        shopName = object.getString("shop_name");
+
+                        mUsername.setText(firstName + " " + lastName);
+
+                        mButtonTopup.setOnClickListener(v -> {
+                            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                            intent.putExtra("menu", "topup");
+                            intent.putExtra("shopName", shopName);
+                            startActivity(intent);
+                        });
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        Volley.newRequestQueue(ProfileActivity.this).add(request);
+    }
+
     private void init() {
         mEditProfile.setOnClickListener(v -> {
             startActivity(new Intent(this, EditProfileActivity.class));
@@ -60,12 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
         mButtonDevice.setOnClickListener(v -> {
             Intent intent = new Intent(this, MenuActivity.class);
             intent.putExtra("menu", "device");
-            startActivity(intent);
-        });
-
-        mButtonTopup.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MenuActivity.class);
-            intent.putExtra("menu", "topup");
             startActivity(intent);
         });
 
@@ -80,6 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
         mButtonTransfer.setOnClickListener(v -> {
             Intent intent = new Intent(this, MenuActivity.class);
             intent.putExtra("menu", "transfer");
+            intent.putExtra("shopName", shopName);
             startActivity(intent);
         });
 
@@ -97,32 +129,5 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void getData(){
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray array = new JSONArray(response);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        String firstName = object.getString("first_name");
-                        String lastName = object.getString("last_name");
-
-                        mUsername.setText(firstName + " " + lastName);
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-        Volley.newRequestQueue(ProfileActivity.this).add(request);
-    }
 
 }

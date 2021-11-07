@@ -42,7 +42,7 @@ public class LoginScreen extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String email, password;
 
-    private String URL = "http://10.198.75.11/prix/login.php";
+    private String URL = "http://192.168.137.1/prix/login.php";
 
 
     @Override
@@ -82,7 +82,7 @@ public class LoginScreen extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.equals("success")) {
                             progressDialog.dismiss();
-                            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+                            Intent intent = new Intent(LoginScreen.this, TestOneActivity.class);
                             startActivity(intent);
                             finish();
 

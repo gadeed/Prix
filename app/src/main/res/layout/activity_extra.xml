@@ -302,5 +302,60 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_qr_code"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/shop_name"
+            android:textSize="22dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="#175E8C"
+            android:layout_marginTop="55dp"
+            android:layout_width="299dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/qr_code" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:text="SHOP CODE:"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textColor="#175E8C"
+            android:layout_marginTop="16dp"
+            android:layout_width="299dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/shop_code"
+            android:textSize="22dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="#175E8C"
+            android:layout_marginTop="16dp"
+            android:layout_width="299dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

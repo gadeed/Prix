@@ -72,7 +72,7 @@
         android:id="@+id/layout_topup"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
@@ -84,7 +84,7 @@
             android:layout_marginBottom="16dp"/>
 
         <LinearLayout
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
@@ -113,7 +113,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
@@ -142,7 +142,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
@@ -171,7 +171,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
@@ -198,6 +198,20 @@
                 android:textColor="#175E8C" />
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request"
+            android:layout_margin="16dp"
+            android:background="@drawable/ic_base"
+            android:fontFamily="@font/montserrat_bold"
+            android:id="@+id/button_request" />
 
     </LinearLayout>
 
@@ -289,7 +303,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/layout_sales"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -396,6 +410,5 @@
 
 
     </LinearLayout>
-
 
 </LinearLayout>

@@ -24,7 +24,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ImageView mButtonBack;
     private TextView mUsername, mPhoneNumber, mMerchantNumber, mEmail, mAddress, mShopName;
 
-    private String URL = "http://10.198.75.11/prix/personalInfo.php";
+    private String URL = "http://192.168.137.1/prix/personalInfo.php";
 
 
     @Override

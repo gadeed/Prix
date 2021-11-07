@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.RequestActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow"
+            android:padding="16dp"
+            android:id="@+id/button_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="Request Top Up"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_centerInParent="true"
+            android:id="@+id/title"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="33dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="#175E8C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Up Amount" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textColorHint="#175E8C"
+            android:padding="8dp"
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/top_up_amount"
+            android:inputType="number"
+            android:textColorHint="#175E8C"
+            android:layout_marginLeft="6dp"
+            android:padding="8dp"
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Enter Top Up Amount"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:background="#16110D"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="33dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="#175E8C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proof of Payment" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:layout_margin="4dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/image_selected"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/background_outline" />
+
+        <TextView
+            android:padding="16dp"
+            android:drawableLeft="@drawable/ic_baseline_add_24"
+            android:drawableTint="#175E8C"
+            android:drawablePadding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Proof of Payment"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="17dp"
+            android:textColor="#175E8C"
+            android:fontFamily="@font/montserrat_bold"
+            android:id="@+id/button_add" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_base"
+        android:fontFamily="@font/montserrat_bold"
+        android:id="@+id/button_request" />
+
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStructure;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -60,6 +61,7 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
     private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
     private ImageView mButtonBack;
+    private Button mButtonRequest;
 
     String pdfFileName;
     protected Typeface tfRegular, tfLight;
@@ -89,6 +91,7 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
         mLayoutHelpCenter = findViewById(R.id.layout_help_center);
 
         mButtonTicket = findViewById(R.id.button_ticket);
+        mButtonRequest = findViewById(R.id.button_request);
 
         seekBarX.setOnSeekBarChangeListener(this);
         seekBarY.setOnSeekBarChangeListener(this);
@@ -103,11 +106,16 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
 
     private void init() {
         mButtonBack.setOnClickListener(v -> onBackPressed());
+
+        mButtonRequest.setOnClickListener(v -> {
+            startActivity(new Intent(this, RequestActivity.class));
+        });
     }
 
     private void receiveIntent() {
         Intent intent = getIntent();
         String menu = intent.getStringExtra("menu");
+        String shopName = intent.getStringExtra("shopName");
 
         if (menu.equals("device")) {
             mLayoutDevice.setVisibility(View.VISIBLE);
@@ -135,13 +143,12 @@ public class MenuActivity extends AppCompatActivity implements OnPageChangeListe
             });
 
             mShareCode.setOnClickListener(v -> {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is a QR Code to send.");
-                sendIntent.setType("text/plain");
+                mTitle.setText("Share My Code");
 
-                Intent shareIntent = Intent.createChooser(sendIntent, null);
-                startActivity(shareIntent);
+                Intent sendIntent = new Intent(MenuActivity.this, ExtraActivity.class);
+                sendIntent.putExtra("extra", "qr_code");
+                sendIntent.putExtra("shopName", shopName);
+                startActivity(sendIntent);
             });
 
         } else if (menu.equals("sales")) {
