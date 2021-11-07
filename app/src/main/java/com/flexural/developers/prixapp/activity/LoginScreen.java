@@ -82,7 +82,7 @@ public class LoginScreen extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.equals("success")) {
                             progressDialog.dismiss();
-                            Intent intent = new Intent(LoginScreen.this, TestOneActivity.class);
+                            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                             finish();
 

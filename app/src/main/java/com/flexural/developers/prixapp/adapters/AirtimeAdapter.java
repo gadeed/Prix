@@ -11,17 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.flexural.developers.prixapp.R;
 import com.flexural.developers.prixapp.model.Airtime;
-import com.flexural.developers.prixapp.utils.DatabaseList;
 
 import java.util.List;
 
 public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHolder> {
     private Context context;
-    private List<DatabaseList> databaseLists;
+    private List<Airtime> airtimeList;
 
-    public AirtimeAdapter(Context context, List<DatabaseList> databaseLists) {
+    public AirtimeAdapter(Context context, List<Airtime> airtimeList) {
         this.context = context;
-        this.databaseLists = databaseLists;
+        this.airtimeList = airtimeList;
     }
 
     @NonNull
@@ -34,20 +33,21 @@ public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DatabaseList airtime = databaseLists.get(position);
-        holder.mPrice.setText(airtime.getProd_id());
-        holder.mPinNumber.setText(airtime.getPin_no());
-        holder.mSerialNumber.setText(airtime.getSerial_no());
-
+        Airtime airtime = airtimeList.get(position);
+        holder.mPrice.setText(airtime.prod_id);
+        holder.mPinNumber.setText(airtime.pin_no);
+        holder.mSerialNumber.setText(airtime.serial_no);
+        holder.mStatus.setText(airtime.status);
+        holder.mExpiredDate.setText(airtime.expired_date);
     }
 
     @Override
     public int getItemCount() {
-        return databaseLists.size();
+        return airtimeList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mPrice, mPinNumber, mSerialNumber;
+        private TextView mPrice, mPinNumber, mSerialNumber, mStatus, mExpiredDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +55,8 @@ public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHold
             mPrice = itemView.findViewById(R.id.price);
             mPinNumber = itemView.findViewById(R.id.pin_number);
             mSerialNumber = itemView.findViewById(R.id.serial_number);
+            mStatus = itemView.findViewById(R.id.status);
+            mExpiredDate = itemView.findViewById(R.id.expired_date);
         }
     }
 }

@@ -34,6 +34,8 @@ public class PrixActivity extends AppCompatActivity {
     private SingleSelectToggleGroup mPrixAirtime, mMtnAirtime, mVodacomAirtime, mCellCAirtime, mTelkomAirtime;
     private RelativeLayout mButtonBuy;
 
+    private String prixAirtime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,44 @@ public class PrixActivity extends AppCompatActivity {
         mTelkomAirtime = findViewById(R.id.telkom_airtime);
         mButtonBack = findViewById(R.id.button_back);
 
+        mPrixAirtime.setOnCheckedChangeListener(new SingleSelectToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SingleSelectToggleGroup group, int checkedId) {
+
+                if (checkedId == 1) {
+                    prixAirtime = "10";
+
+                } else if (checkedId == 2) {
+                    prixAirtime = "12";
+
+                } else if (checkedId == 3) {
+                    prixAirtime = "15";
+
+                } else if (checkedId == 4) {
+                    prixAirtime = "20";
+
+                } else if (checkedId == 5) {
+                    prixAirtime = "25";
+
+                } else if (checkedId == 6) {
+                    prixAirtime = "29";
+
+                } else if (checkedId == 7) {
+                    prixAirtime = "30";
+
+                } else if (checkedId == 8) {
+                    prixAirtime = "55";
+
+                } else if (checkedId == 9) {
+                    prixAirtime = "60";
+
+                } else {
+                    prixAirtime = "5";
+
+                }
+            }
+        });
+
         init();
         receiveIntent();
 
@@ -66,24 +106,9 @@ public class PrixActivity extends AppCompatActivity {
         });
 
         mButtonBuy.setOnClickListener(v -> {
-            Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.layout_dialog_airtime);
-
-            TextView mButtonCancel = dialog.findViewById(R.id.button_cancel);
-            TextView mButtonSell = dialog.findViewById(R.id.button_sell);
-
-            mButtonCancel.setOnClickListener(v1 -> dialog.dismiss());
-
-            mButtonSell.setOnClickListener(v1 -> {
-                startActivity(new Intent(PrixActivity.this, TestActivity.class));
-            });
-
-            dialog.show();
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            dialog.getWindow().setGravity(Gravity.CENTER);
+            Intent intent = new Intent(this, AirtimeActivity.class);
+            intent.putExtra("airtime", prixAirtime);
+            startActivity(intent);
 
         });
 
