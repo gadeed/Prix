@@ -81,7 +81,7 @@ public class CodeActivity extends AppCompatActivity {
     private final static String KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string";
 
     private RelativeLayout mButtonNext;
-    private EditText mInputStreet, mInputCity, mInputCountry, mInputShopName;
+    private EditText mInputStreet, mInputCity, mInputShopName;
 
     private String userId, currentDateTime, mLastUpdateTime, longitude, latitude, locationAddress;
     private String shop_name, first_name, last_name, address, city, phone;
@@ -343,7 +343,6 @@ public class CodeActivity extends AppCompatActivity {
                     String city = bundle.getString("city");
 
                     mInputStreet.setText(locationAddress);
-                    mInputCountry.setText(country);
                     mInputCity.setText(city);
 
                     break;

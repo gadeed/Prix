@@ -50,6 +50,8 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
+import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
+
 public class RequestActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
@@ -59,7 +61,7 @@ public class RequestActivity extends AppCompatActivity {
     private EditText mTopUpAmount;
     private Button mButtonRequest;
 
-    private String URL = "http://192.168.137.1/prix/topUp.php";
+    private String URL = BASE_URL + "topUp.php";
     private String topUpAmount, currentDate;
 
     @Override

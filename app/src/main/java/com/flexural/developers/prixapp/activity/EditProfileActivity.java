@@ -19,12 +19,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
+
 public class EditProfileActivity extends AppCompatActivity {
 
     private ImageView mButtonBack;
-    private TextView mUsername, mPhoneNumber, mMerchantNumber, mEmail, mAddress, mShopName;
+    private TextView mUsername, mPhoneNumber, mMerchantNumber, mEmail, mAddress, mShopName, mID;
 
-    private String URL = "http://192.168.137.1/prix/personalInfo.php";
+    private String URL = BASE_URL + "personalInfo.php";
 
 
     @Override
@@ -39,6 +41,8 @@ public class EditProfileActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.email_address);
         mAddress = findViewById(R.id.address);
         mShopName = findViewById(R.id.shop_name);
+
+        mID = findViewById(R.id.id);
 
         init();
         getData();
@@ -57,6 +61,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
+                        String id = object.getString("id");
                         String firstName = object.getString("first_name");
                         String lastName = object.getString("last_name");
                         String shopName = object.getString("shop_name");
@@ -70,6 +75,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         mPhoneNumber.setText(phone);
                         mAddress.setText(address + ", " + city);
                         mShopName.setText(shopName);
+                        mID.setText(id);
 
                     }
                 } catch (JSONException e) {

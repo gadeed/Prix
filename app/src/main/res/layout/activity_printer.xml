@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_margin="8dp"
+            android:id="@+id/btn_load_bluetoothPrinter"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/load_bluetoothPrinter" />
+
+        <Button
+            android:id="@+id/btn_printer_init"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:text="@string/printer_init" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="16dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="16dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_airtime" />
+
+        <TextView
+            android:visibility="gone"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Airtime" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <View
+            android:visibility="gone"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#7A7A7A" />
+
+        <ImageView
+            android:layout_marginLeft="16dp"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#7A7A7A" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Network"
+            android:layout_margin="16dp" />
+
+        <TextView
+            android:id="@+id/airtime_amount"
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R5"
+            android:layout_margin="16dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Airtime"
+        android:layout_margin="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_view" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_printer_test"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:text="@string/printer_test" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_leftMargin_test"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:text="@string/print_leftMargin" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:text="@string/exit" />
+
+    </LinearLayout>
+
+</LinearLayout>

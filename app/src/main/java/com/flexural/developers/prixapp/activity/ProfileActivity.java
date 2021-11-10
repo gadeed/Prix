@@ -22,13 +22,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
+
 public class ProfileActivity extends AppCompatActivity {
     private LinearLayout mEditProfile, mButtonDevice, mButtonTopup, mButtonTransfer, mButtonSales;
     private LinearLayout mButtonHelpCenter;
     private ImageView mButtonDashboard, mButtonSettings;
     private TextView mUsername;
 
-    private String URL = "http://192.168.137.1/prix/personalInfo.php";
+    private String URL = BASE_URL + "personalInfo.php";
     private String shopName;
 
 

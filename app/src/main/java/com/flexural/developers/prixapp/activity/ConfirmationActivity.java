@@ -2,28 +2,44 @@ package com.flexural.developers.prixapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.flexural.developers.prixapp.MainActivity;
 import com.flexural.developers.prixapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
 
 public class ConfirmationActivity extends AppCompatActivity {
 
     private RelativeLayout mButtonNext;
 
-    private String userId;
-
-    private DatabaseReference mProfileRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,30 +48,16 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         mButtonNext = findViewById(R.id.button_next);
 
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        mProfileRef = FirebaseDatabase.getInstance().getReference().child("prix").child("profile");
-
         init();
 
     }
 
     private void init() {
         mButtonNext.setOnClickListener(v -> {
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("account", "true");
-
-            mProfileRef.child(userId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Intent intent = new Intent(ConfirmationActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                    }
-                }
-            });
+            startActivity(new Intent(ConfirmationActivity.this, MainActivity.class));
+            finish();
 
         });
     }
+
 }

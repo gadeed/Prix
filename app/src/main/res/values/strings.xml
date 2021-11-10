@@ -28,7 +28,7 @@
     <string name="print_Multithread_test">MultiThread Print Test</string>
     <string name="get_BluetoothAdapter_fail">Please Open Bluetooth!</string>
     <string name="get_BluetoothPrinterDevice_fail">Please Make Sure Bluetooth have IposPrinter!</string>
-    <string name="get_BluetoothPrinterDevice_success">Bluetooth Printer Driver is loading success!</string>
+    <string name="get_BluetoothPrinterDevice_success">Bluetooth Printer Driver did not load success!</string>
     <string name="reset_motor_high_temp_status">Rest Moter Heigh Temp Status</string>
     <string name="out_of_paper">The printer is out of paper</string>
     <string name="exists_paper">The printer paper is ready</string>

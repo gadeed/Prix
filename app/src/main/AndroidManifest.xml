@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
@@ -20,8 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Prix">
-        <activity android:name=".activity.AirtimeActivity"></activity>
-        <activity android:name=".activity.TestOneActivity" />
+        <activity android:name=".activity.PrinterActivity"></activity>
+        <activity android:name=".activity.AirtimeActivity" />
         <activity android:name=".activity.RequestActivity" />
         <activity android:name=".activity.ReferenceActivity" />
         <activity android:name=".activity.AddFriendActivity" />
@@ -29,7 +31,6 @@
         <activity android:name=".activity.ExtraActivity" />
         <activity android:name=".activity.MenuActivity" />
         <activity android:name=".activity.EditProfileActivity" />
-        <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.RemitMoneyActivity" />
         <activity android:name=".activity.PaymentActivity" />

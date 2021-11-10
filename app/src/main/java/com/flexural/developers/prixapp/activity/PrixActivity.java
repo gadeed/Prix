@@ -1,6 +1,8 @@
 package com.flexural.developers.prixapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -21,10 +23,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.flexural.developers.prixapp.R;
+import com.flexural.developers.prixapp.adapters.AirtimeAdapter;
+import com.flexural.developers.prixapp.model.Airtime;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
 
 public class PrixActivity extends AppCompatActivity {
 
@@ -106,7 +123,7 @@ public class PrixActivity extends AppCompatActivity {
         });
 
         mButtonBuy.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AirtimeActivity.class);
+            Intent intent = new Intent(this, PrinterActivity.class);
             intent.putExtra("airtime", prixAirtime);
             startActivity(intent);
 
@@ -114,10 +131,6 @@ public class PrixActivity extends AppCompatActivity {
 
         mButtonBack.setOnClickListener(v -> onBackPressed());
 
-    }
-
-    private void printReceipt() {
-        Toast.makeText(this, "Print Receipt", Toast.LENGTH_SHORT).show();
     }
 
     private void showDialog() {
@@ -218,10 +231,13 @@ public class PrixActivity extends AppCompatActivity {
             mSelectNetwork.setVisibility(View.GONE);
             mNetworkContainer.setVisibility(View.GONE);
 
+
         } else if (title.equals("network")) {
             mVodacomAirtime.setVisibility(View.VISIBLE);
         } else {
 
         }
     }
+
+
 }

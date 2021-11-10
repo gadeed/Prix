@@ -3,7 +3,10 @@ package com.flexural.developers.prixapp.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -35,14 +38,17 @@ import java.util.Map;
 
 public class LoginScreen extends AppCompatActivity {
 
+    public static String IP_ADDRESS = "10.200.203.25";
+    public static String BASE_URL = "http://" + IP_ADDRESS + "/prix/";
+    private String URL = BASE_URL + "login.php";
+
     private ImageView mButtonClose;
     private EditText mInputEmail, mInputPassword;
     private RelativeLayout mButtonSignIn, mButtonSignUp;
+    private CheckBox mShowPassword;
 
     private ProgressDialog progressDialog;
     private String email, password;
-
-    private String URL = "http://192.168.137.1/prix/login.php";
 
 
     @Override
@@ -55,6 +61,7 @@ public class LoginScreen extends AppCompatActivity {
         mButtonSignUp = findViewById(R.id.button_sign_up);
         mInputEmail = findViewById(R.id.input_email);
         mInputPassword = findViewById(R.id.input_password);
+        mShowPassword = findViewById(R.id.show_password);
 
         email = password = "";
 
@@ -136,6 +143,19 @@ public class LoginScreen extends AppCompatActivity {
         mButtonSignUp.setOnClickListener(v -> {
             startActivity(new Intent(this, RegistrationActivity.class));
 
+        });
+
+        mShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mInputPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+                } else {
+                    mInputPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+                }
+            }
         });
     }
 

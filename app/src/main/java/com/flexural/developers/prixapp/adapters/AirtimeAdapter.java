@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,11 +40,15 @@ public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHold
         holder.mSerialNumber.setText(airtime.serial_no);
         holder.mStatus.setText(airtime.status);
         holder.mExpiredDate.setText(airtime.expired_date);
+        
+        holder.itemView.setOnClickListener(v -> {
+            Toast.makeText(context, "Position: " + position, Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
     public int getItemCount() {
-        return airtimeList.size();
+        return 1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

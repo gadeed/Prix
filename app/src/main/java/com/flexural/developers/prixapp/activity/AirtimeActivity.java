@@ -30,13 +30,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
+
 public class AirtimeActivity extends AppCompatActivity {
 
     private RecyclerView mAirtimeRecycler;
     private List<Airtime> airtimeList;
     private AirtimeAdapter airtimeAdapter;
 
-    private String URL = "http://192.168.137.1/prix/airtimeList.php";
+    private String URL =  BASE_URL + "airtimeList.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +83,7 @@ public class AirtimeActivity extends AppCompatActivity {
                             Airtime airtime = new Airtime(prod_id, pin_no, serial_no, status, expired_date);
                             airtimeList.add(airtime);
 
-                            showDialog(selectedAirtime);
+//                            showDialog(selectedAirtime);
 
                         }
 
@@ -122,7 +124,7 @@ public class AirtimeActivity extends AppCompatActivity {
 
         mButtonSell.setOnClickListener(v1 -> {
             dialog.dismiss();
-            startActivity(new Intent(AirtimeActivity.this, TestActivity.class));
+            startActivity(new Intent(AirtimeActivity.this, PrinterActivity.class));
         });
 
         dialog.show();
