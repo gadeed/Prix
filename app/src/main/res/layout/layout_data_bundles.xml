@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="115dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+    <LinearLayout
+        android:id="@+id/background"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R5"
+                android:id="@+id/data_price"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingLeft="8dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"/>
+
+            <TextView
+                android:textColor="@color/white"
+                android:paddingRight="8dp"
+                android:paddingTop="16dp"
+                android:paddingLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(100MB)"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:id="@+id/data_amount" />
+
+        </LinearLayout>
+
+        <TextView
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingBottom="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:fontFamily="@font/montserrat_regular"
+            android:id="@+id/description" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

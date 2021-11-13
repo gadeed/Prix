@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.DataDetailsActivity">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Header"
+        android:textSize="17dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="Price"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp" />
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/background">
+
+        <TextView
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:id="@+id/network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Network"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp" />
+
+    </RelativeLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:textColor="@color/white"
+            android:background="@drawable/background_outline"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_margin="16dp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+
+        <Button
+            android:textColor="@color/white"
+            android:background="@drawable/background_outline"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Print"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_margin="16dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

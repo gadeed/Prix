@@ -11,6 +11,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -27,6 +29,7 @@ import com.flexural.developers.prixapp.MainActivity;
 import com.flexural.developers.prixapp.R;
 import com.flexural.developers.prixapp.adapters.AirtimeAdapter;
 import com.flexural.developers.prixapp.model.Airtime;
+import com.flexural.developers.prixapp.utils.BitMapUtil;
 import com.flexural.developers.prixapp.utils.BluetoothUtil;
 import com.flexural.developers.prixapp.utils.ButtonDelayUtils;
 import com.flexural.developers.prixapp.utils.ESCUtil;
@@ -41,7 +44,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -59,13 +65,14 @@ public class PrinterActivity extends AppCompatActivity {
     private TextView mAirtimeAmount;
 
     private String URL =  BASE_URL + "airtimeList.php";
+    private String currentDate, currentTime;
+    private Calendar calendar;
 
     private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothDevice mBluetoothPrinterDevice = null;
     private BluetoothSocket socket = null;
 
-    private Button btn_printer_test,btn_leftMargin_test;
-    private Button btn_exit;
+    private Button btn_printer_test;
     private Button btn_load_bluetoothPrinter,btn_printer_init;
     /*定义打印机状态*/
     private final int PRINTER_NORMAL = 0;
@@ -244,16 +251,12 @@ public class PrinterActivity extends AppCompatActivity {
         btn_load_bluetoothPrinter.setEnabled(flag);
         btn_printer_init.setEnabled(flag);
         btn_printer_test.setEnabled(flag);
-        btn_leftMargin_test.setEnabled(flag);
-        btn_exit.setEnabled(flag);
     }
 
     private void innitView() {
         btn_load_bluetoothPrinter = findViewById(R.id.btn_load_bluetoothPrinter);
         btn_printer_init = findViewById(R.id.btn_printer_init);
         btn_printer_test = findViewById(R.id.btn_printer_test);
-        btn_leftMargin_test = findViewById(R.id.btn_leftMargin_test);
-        btn_exit = findViewById(R.id.btn_exit);
 
         btn_load_bluetoothPrinter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,19 +271,6 @@ public class PrinterActivity extends AppCompatActivity {
                 loopPrintFlag = DEFAULT_LOOP_PRINT;
                 if(getPrinterStatus() == PRINTER_NORMAL)
                     printerInit();
-            }
-        });
-        btn_leftMargin_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btn_exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loopPrintFlag = DEFAULT_LOOP_PRINT;
-                finish();
             }
         });
         setButtonEnable(true);
@@ -300,6 +290,8 @@ public class PrinterActivity extends AppCompatActivity {
         mAirtimeRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         airtimeList = new ArrayList<>();
+
+        calendar = Calendar.getInstance();
 
         innitView();
         receiveIntent();
@@ -479,7 +471,7 @@ public class PrinterActivity extends AppCompatActivity {
             e.printStackTrace();
             return;
         }
-        Toast.makeText(getBaseContext(), R.string.get_BluetoothPrinterDevice_success, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getBaseContext(), R.string.get_BluetoothPrinterDevice_success, Toast.LENGTH_LONG).show();
     }
 
     public int getPrinterStatus()
@@ -551,6 +543,13 @@ public class PrinterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+                    DateFormat df = new SimpleDateFormat("dd/MM/yy");
+                    currentDate = df.format(Calendar.getInstance().getTime());
+
+                    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                    currentTime = dateFormat.format(Calendar.getInstance().getTime());
+
                     byte[] printer_init = ESCUtil.init_printer();
                     byte[] fontSize0 = ESCUtil.fontSizeSet((byte) 0x00);
                     byte[] fontSize1 = ESCUtil.fontSizeSet((byte) 0x01);
@@ -562,20 +561,18 @@ public class PrinterActivity extends AppCompatActivity {
                     byte[] align0 = ESCUtil.alignMode((byte)0);
                     byte[] align1 = ESCUtil.alignMode((byte)1);
                     byte[] align2 = ESCUtil.alignMode((byte)2);
-                    byte[] title1 = "PRIX\n".getBytes("GBK");
-                    byte[] title2 = "To recharge: *136*7467*PIN#\n".getBytes("GBK");
-                    byte[] fontTest1 = "PIN".getBytes("GBK");
-                    byte[] fontTest2 = PinNumber.getBytes("GBK");
-                    byte[] fontTest3 = "OR Scan the barcode below".getBytes("GBK");
-                    byte[] orderSerinum = "Date: 10/11/21 Wednesday 09:14".getBytes("GBK");
-                    byte[] testSign = "S/N: ".getBytes("GBK");
-                    byte[] testInfo = SerialNumber.getBytes("GBK");
-                    byte[] nextLine = ESCUtil.nextLines(1);
+                    String upperData = "To recharge: *136*7467*PIN# \n\nPIN \n" + PinNumber + "\n\nOR Scan the barcode below: \n\n";
+                    byte[] title2 = upperData.getBytes("GBK");
+                    String lowerData = "Date: " + currentDate + " " + calendar.get(Calendar.DAY_OF_WEEK) + " " + currentTime;
+                    byte[] orderSerinum = lowerData.getBytes("GBK");
+                    String serialNumber = "S/N: " + SerialNumber;
+                    byte[] testInfo = serialNumber.getBytes("GBK");
+                    byte[] QrCodeData = PinNumber.getBytes("GBK");
+                    byte[] nextLine = ESCUtil.nextLines(2);
                     byte[] performPrint = ESCUtil.performPrintAndFeedPaper((byte)200);
 
-                    byte[][] cmdBytes = {printer_init,lineH0,fontSize3,align1,title1,fontSize1,title2,nextLine,align0,
-                            fontSize0,fontSize0,lineH1,fontSize1,fontTest1,lineH0,fontSize2,fontTest2,
-                            lineH1,fontSize3,fontTest3,align2,lineH0,fontSize0,orderSerinum,testSign,
+                    byte[][] cmdBytes = {printer_init,lineH0,fontSize3,align1, BitMapUtil.getBitmapPrintData(bitmap, 279, 0), nextLine,fontSize1,title2,nextLine,align0,
+                            fontSize0,lineH1,fontSize1,align1,ESCUtil.setQRsize(8), ESCUtil.setQRCorrectionLevel(48), ESCUtil.cacheQRData(QrCodeData), nextLine, lineH0,fontSize0,orderSerinum,
                             align1,fontSize1,lineH1,testInfo,nextLine,performPrint};
                     try {
                         if((socket == null) || (!socket.isConnected()))

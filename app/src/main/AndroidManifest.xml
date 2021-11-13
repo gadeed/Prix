@@ -22,7 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Prix">
-        <activity android:name=".activity.PrinterActivity"></activity>
+        <activity android:name=".activity.DataDetailsActivity"></activity>
+        <activity android:name=".activity.DataActivity" />
+        <activity android:name=".activity.PrinterActivity" />
         <activity android:name=".activity.AirtimeActivity" />
         <activity android:name=".activity.RequestActivity" />
         <activity android:name=".activity.ReferenceActivity" />

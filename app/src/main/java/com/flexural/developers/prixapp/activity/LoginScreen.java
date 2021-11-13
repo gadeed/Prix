@@ -38,8 +38,9 @@ import java.util.Map;
 
 public class LoginScreen extends AppCompatActivity {
 
-    public static String IP_ADDRESS = "10.200.203.25";
+    public static String IP_ADDRESS = "10.29.112.195";
     public static String BASE_URL = "http://" + IP_ADDRESS + "/prix/";
+//    public static String BASE_URL = "https://prix.co.za/app/";
     private String URL = BASE_URL + "login.php";
 
     private ImageView mButtonClose;
@@ -76,6 +77,10 @@ public class LoginScreen extends AppCompatActivity {
         mButtonClose.setOnClickListener(v -> {
             onBackPressed();
         });
+
+//        mButtonSignIn.setOnClickListener(v -> {
+//            startActivity(new Intent(this, MainActivity.class));
+//        });
 
         mButtonSignIn.setOnClickListener(v -> {
             email = mInputEmail.getText().toString().trim();

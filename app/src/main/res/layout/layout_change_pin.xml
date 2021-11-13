@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_margin="16dp"
+        android:textSize="17dp"
+        android:textColor="#175E8C" />
+
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="33dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="#175E8C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Old PIN" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginRight="4dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_pin" />
+
+        <EditText
+            android:hint="Enter Old PIN"
+            android:id="@+id/old_password"
+            android:inputType="textPassword"
+            android:textColorHint="#175E8C"
+            android:layout_marginLeft="6dp"
+            android:padding="8dp"
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:background="#16110D"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="33dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="#175E8C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New PIN" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginRight="4dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_phone" />
+
+        <EditText
+            android:id="@+id/input_password"
+            android:inputType="textPassword"
+            android:textColorHint="#175E8C"
+            android:layout_marginLeft="6dp"
+            android:padding="8dp"
+            android:textColor="#175E8C"
+            android:textSize="17dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Enter New PIN"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="32dp"
+        android:background="#16110D"
+        android:layout_marginTop="10dp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="100dp" />
+
+    <RelativeLayout
+        android:id="@+id/change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/ic_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CHANGE PASSWORD"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

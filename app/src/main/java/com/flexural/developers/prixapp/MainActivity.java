@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.flexural.developers.prixapp.activity.DataActivity;
 import com.flexural.developers.prixapp.activity.ElectrictyOptionsActivity;
 import com.flexural.developers.prixapp.activity.PaymentActivity;
 import com.flexural.developers.prixapp.activity.PrixActivity;
@@ -69,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mButtonDataBundles.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PrixActivity.class);
-            intent.putExtra("title", "data");
+            Intent intent = new Intent(this, DataActivity.class);
+            intent.putExtra("dataBundles", "vodacom");
             startActivity(intent);
         });
 

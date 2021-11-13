@@ -137,37 +137,15 @@
         android:orientation="horizontal">
 
         <Button
+            android:backgroundTint="#175E8C"
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@drawable/ic_bg"
             android:id="@+id/btn_printer_test"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:layout_height="wrap_content"
-            android:text="@string/printer_test" />
-
-        <Button
-            android:visibility="gone"
-            android:id="@+id/btn_leftMargin_test"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content"
-            android:text="@string/print_leftMargin" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_exit"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content"
-            android:text="@string/exit" />
+            android:text="Print" />
 
     </LinearLayout>
 

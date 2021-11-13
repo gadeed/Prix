@@ -15,7 +15,7 @@
         android:src="@drawable/ic_settings_header" />
 
     <LinearLayout
-        android:id="@+id/button_topup"
+        android:id="@+id/button_change_pin"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="37dp"

@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String termsCondition = "false";
 
-    private String URL = BASE_URL + "register.php";
+    private String URL = BASE_URL + "registerInfo.php";
     private String MERCHANT_URL = BASE_URL + "merchantUpload.php";
     private String INFO_URL = BASE_URL + "personalInfo.php";
 
