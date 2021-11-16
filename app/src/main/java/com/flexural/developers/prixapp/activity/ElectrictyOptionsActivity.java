@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.flexural.developers.prixapp.R;
+import com.flexural.developers.prixapp.model.Electricity;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ElectrictyOptionsActivity extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class ElectrictyOptionsActivity extends AppCompatActivity {
 
     private void init() {
         mButtonUniPin.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PrixActivity.class);
+            Intent intent = new Intent(this, ElectricityActivity.class);
             intent.putExtra("title", "unipin");
             startActivity(intent);
         });

@@ -56,48 +56,6 @@
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID" />
-
-            <TextView
-                android:id="@+id/id"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:textColor="#7a7a7a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="John Doe" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/background_outline"
-        android:layout_marginTop="54dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:padding="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_name" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:textColor="#175E8C"
-                android:textSize="17dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Full name" />
 
             <TextView
@@ -178,7 +136,7 @@
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Merchant Number" />
+                android:text="Merchant ID" />
 
             <TextView
                 android:id="@+id/merchant_number"

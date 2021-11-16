@@ -28,7 +28,7 @@ public class ExtraActivity extends AppCompatActivity {
     private ImageView mButtonBack, mQrCode;
     private LinearLayout mLayoutTicket, mLayoutQrCode;
     private RelativeLayout mButtonTicket;
-    private TextView mShopName;
+    private TextView mShopName, mShopCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class ExtraActivity extends AppCompatActivity {
         mLayoutQrCode = findViewById(R.id.layout_qr_code);
         mQrCode = findViewById(R.id.qr_code);
         mShopName = findViewById(R.id.shop_name);
+        mShopCode = findViewById(R.id.shop_code);
 
         init();
         try {
@@ -55,6 +56,7 @@ public class ExtraActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String extra = intent.getStringExtra("extra");
         String shopName = intent.getStringExtra("shopName");
+        String acc_no = intent.getStringExtra("mid");
 
         if (extra.equals("ticket")) {
             mLayoutTicket.setVisibility(View.VISIBLE);
@@ -67,6 +69,7 @@ public class ExtraActivity extends AppCompatActivity {
             mLayoutQrCode.setVisibility(View.VISIBLE);
 
             mShopName.setText(shopName);
+            mShopCode.setText(acc_no);
 
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
             Display display = manager.getDefaultDisplay();

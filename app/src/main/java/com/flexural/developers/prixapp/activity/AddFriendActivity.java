@@ -37,7 +37,7 @@ public class AddFriendActivity extends AppCompatActivity {
         mAddShopCode.setOnClickListener(v -> {
             shopCode = mShopCode.getText().toString().trim();
 
-            if (shopCode.equals("")) {
+            if (!shopCode.equals("")) {
 
             } else {
                 Toast.makeText(this, "Please Enter the Shop Code", Toast.LENGTH_SHORT).show();

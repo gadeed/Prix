@@ -24,9 +24,10 @@ import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
 public class EditProfileActivity extends AppCompatActivity {
 
     private ImageView mButtonBack;
-    private TextView mUsername, mPhoneNumber, mMerchantNumber, mEmail, mAddress, mShopName, mID;
+    private TextView mUsername, mPhoneNumber, mMerchantNumber, mEmail, mAddress, mShopName;
 
     private String URL = BASE_URL + "personalInfo.php";
+    private String URL_WALLET = BASE_URL + "merchantWallet.php";
 
 
     @Override
@@ -41,8 +42,6 @@ public class EditProfileActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.email_address);
         mAddress = findViewById(R.id.address);
         mShopName = findViewById(R.id.shop_name);
-
-        mID = findViewById(R.id.id);
 
         init();
         getData();
@@ -75,7 +74,33 @@ public class EditProfileActivity extends AppCompatActivity {
                         mPhoneNumber.setText(phone);
                         mAddress.setText(address + ", " + city);
                         mShopName.setText(shopName);
-                        mID.setText(id);
+
+                        StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONArray array = new JSONArray(response);
+                                    for (int i = 0; i < array.length(); i++) {
+                                        JSONObject object = array.getJSONObject(i);
+                                        String mid = object.getString("mid");
+                                        String acc_no = object.getString("acc_no");
+
+                                        mMerchantNumber.setText(acc_no);
+
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(EditProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        Volley.newRequestQueue(EditProfileActivity.this).add(request);
 
                     }
                 } catch (JSONException e) {

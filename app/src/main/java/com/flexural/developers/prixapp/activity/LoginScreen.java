@@ -2,6 +2,7 @@ package com.flexural.developers.prixapp.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -38,9 +39,9 @@ import java.util.Map;
 
 public class LoginScreen extends AppCompatActivity {
 
-    public static String IP_ADDRESS = "10.29.112.195";
-    public static String BASE_URL = "http://" + IP_ADDRESS + "/prix/";
-//    public static String BASE_URL = "https://prix.co.za/app/";
+    public static String IP_ADDRESS = "10.29.112.249";
+//    public static String BASE_URL = "http://" + IP_ADDRESS + "/prix/";
+    public static String BASE_URL = "https://prix.co.za/app/";
     private String URL = BASE_URL + "login.php";
 
     private ImageView mButtonClose;
@@ -50,6 +51,7 @@ public class LoginScreen extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private String email, password;
+    private SharedPreferences sp;
 
 
     @Override
@@ -65,6 +67,8 @@ public class LoginScreen extends AppCompatActivity {
         mShowPassword = findViewById(R.id.show_password);
 
         email = password = "";
+
+        sp = getSharedPreferences("login", MODE_PRIVATE);
 
         progressDialog = new ProgressDialog(LoginScreen.this);
         progressDialog.setMessage("Login...");
@@ -97,6 +101,8 @@ public class LoginScreen extends AppCompatActivity {
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+
+                            sp.edit().putBoolean("logged", true).apply();
 
                         } else if (response.equals("failure")) {
                             progressDialog.dismiss();
@@ -164,4 +170,13 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (sp.getBoolean("logged", false)) {
+            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -44,12 +45,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     private ImageView mButtonBack;
     private RelativeLayout mButtonLogout;
-    private LinearLayout mChangePin;
+    private LinearLayout mChangePin, mButtonTermsConditions;
 
     private String oldPassword, newPassword;
     private ProgressDialog progressDialog;
 
     private String URL = BASE_URL + "update.php";
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +62,13 @@ public class SettingsActivity extends AppCompatActivity {
         mButtonBack = findViewById(R.id.button_back);
         mButtonLogout = findViewById(R.id.button_logout);
         mChangePin = findViewById(R.id.button_change_pin);
+        mButtonTermsConditions = findViewById(R.id.button_terms_conditions);
 
         oldPassword = newPassword = "";
 
         progressDialog = new ProgressDialog(this);
 
-        mButtonLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, LoginScreen.class));
-            Snackbar.make(findViewById(android.R.id.content), "Log Out", Snackbar.LENGTH_SHORT).show();
-        });
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
         init();
 
@@ -80,6 +80,23 @@ public class SettingsActivity extends AppCompatActivity {
         mChangePin.setOnClickListener(v -> {
             showDialog();
         });
+
+        mButtonLogout.setOnClickListener(v -> {
+            sharedPreferences.edit().putBoolean("logged", false).apply();
+            Intent intent = new Intent(this, LoginScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+
+            Toast.makeText(this, "Successfully Sign Out!", Toast.LENGTH_SHORT).show();
+        });
+
+        mButtonTermsConditions.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MenuActivity.class);
+            intent.putExtra("menu", "privacy");
+            startActivity(intent);
+        });
+
     }
 
     private void showDialog() {
@@ -95,8 +112,9 @@ public class SettingsActivity extends AppCompatActivity {
             oldPassword = mOldPassword.getText().toString().trim();
             newPassword = mNewPassword.getText().toString().trim();
 
-            if (!oldPassword.equals("") && newPassword.equals("")) {
+            if (!oldPassword.equals("") && !newPassword.equals("")) {
                 progressDialog.setMessage("Updating PIN...");
+                progressDialog.show();
                 StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -105,6 +123,8 @@ public class SettingsActivity extends AppCompatActivity {
                             Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+
+                            Toast.makeText(SettingsActivity.this, "Password change successful", Toast.LENGTH_SHORT).show();
 
                         } else if (response.equals("failure")) {
                             progressDialog.dismiss();

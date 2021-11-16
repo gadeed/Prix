@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -35,6 +36,7 @@ import com.flexural.developers.prixapp.utils.ButtonDelayUtils;
 import com.flexural.developers.prixapp.utils.ESCUtil;
 import com.flexural.developers.prixapp.utils.HandlerUtils;
 import com.flexural.developers.prixapp.utils.ThreadPoolManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +59,7 @@ public class PrinterActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private String prod_id, pin_no, serial_no;
+    private String prod_id, pin_no, serial_no, av_qty;
 
     private RecyclerView mAirtimeRecycler;
     private List<Airtime> airtimeList;
@@ -65,7 +67,9 @@ public class PrinterActivity extends AppCompatActivity {
     private TextView mAirtimeAmount;
 
     private String URL =  BASE_URL + "airtimeList.php";
-    private String currentDate, currentTime;
+    private String URL_QNTY =  BASE_URL + "airtimeQuantity.php";
+
+    private String currentDate, currentTime, day;
     private Calendar calendar;
 
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -306,6 +310,58 @@ public class PrinterActivity extends AppCompatActivity {
 
     }
 
+//    private void getQuantity(String selectedAirtime) {
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_QNTY, new com.android.volley.Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONArray array = new JSONArray(response);
+//                    for (int i = 0; i < array.length(); i++) {
+//                        JSONObject object = array.getJSONObject(i);
+//
+//                        prod_id = object.getString("prod_id");
+//                        av_qty = object.getString("av_qty");
+//
+//                        if (prod_id.equals(selectedAirtime.substring(1))) {
+//                            if (!av_qty.equals("0")) {
+//
+//                            } else {
+//                                Snackbar.make(findViewById(android.R.id.content), "Out of Stock. Select Another One.", Snackbar.LENGTH_INDEFINITE)
+//                                        .setAction("OK", new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View v) {
+//                                                onBackPressed();
+//                                            }
+//                                        });
+//                            }
+//
+//
+//                        } else {
+//                            Snackbar.make(findViewById(android.R.id.content), "Out of Stock. Select Another One.", Snackbar.LENGTH_INDEFINITE)
+//                                    .setAction("OK", new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            onBackPressed();
+//                                        }
+//                                    });
+//                        }
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new com.android.volley.Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(PrinterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        Volley.newRequestQueue(PrinterActivity.this).add(stringRequest);
+//    }
+
     private void getAirtime(String selectedAirtime) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new com.android.volley.Response.Listener<String>() {
             @Override
@@ -543,12 +599,36 @@ public class PrinterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.prix_logo);
                     DateFormat df = new SimpleDateFormat("dd/MM/yy");
                     currentDate = df.format(Calendar.getInstance().getTime());
 
                     DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
                     currentTime = dateFormat.format(Calendar.getInstance().getTime());
+                    int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+
+                    if (currentDay == 1) {
+                        day = "Sun";
+
+                    } else if (currentDay == 2) {
+                        day = "Mon";
+
+                    } else if (currentDay == 3) {
+                        day = "Tue";
+
+                    } else if (currentDay == 4) {
+                        day = "Wed";
+
+                    } else if (currentDay == 5) {
+                        day = "Thur";
+
+                    } else if (currentDay == 6) {
+                        day = "Fri";
+
+                    } else if (currentDay == 7) {
+                        day = "Sat";
+
+                    }
 
                     byte[] printer_init = ESCUtil.init_printer();
                     byte[] fontSize0 = ESCUtil.fontSizeSet((byte) 0x00);
@@ -561,18 +641,25 @@ public class PrinterActivity extends AppCompatActivity {
                     byte[] align0 = ESCUtil.alignMode((byte)0);
                     byte[] align1 = ESCUtil.alignMode((byte)1);
                     byte[] align2 = ESCUtil.alignMode((byte)2);
-                    String upperData = "To recharge: *136*7467*PIN# \n\nPIN \n" + PinNumber + "\n\nOR Scan the barcode below: \n\n";
-                    byte[] title2 = upperData.getBytes("GBK");
-                    String lowerData = "Date: " + currentDate + " " + calendar.get(Calendar.DAY_OF_WEEK) + " " + currentTime;
+                    String heading = "To recharge. Dial";
+                    String pin = "*130*7467*" + PinNumber + "#";
+                    String scan = "OR Scan the barcode below:";
+                    //Make PIN bold
+                    byte[] title2 = heading.getBytes("GBK");
+                    byte[] title3 = pin.getBytes("GBK");
+                    byte[] title4 = scan.getBytes("GBK");
+
+                    String lowerData = "Date: " + currentDate + " " + day + " " + currentTime;
                     byte[] orderSerinum = lowerData.getBytes("GBK");
                     String serialNumber = "S/N: " + SerialNumber;
                     byte[] testInfo = serialNumber.getBytes("GBK");
                     byte[] QrCodeData = PinNumber.getBytes("GBK");
+
                     byte[] nextLine = ESCUtil.nextLines(2);
                     byte[] performPrint = ESCUtil.performPrintAndFeedPaper((byte)200);
 
-                    byte[][] cmdBytes = {printer_init,lineH0,fontSize3,align1, BitMapUtil.getBitmapPrintData(bitmap, 279, 0), nextLine,fontSize1,title2,nextLine,align0,
-                            fontSize0,lineH1,fontSize1,align1,ESCUtil.setQRsize(8), ESCUtil.setQRCorrectionLevel(48), ESCUtil.cacheQRData(QrCodeData), nextLine, lineH0,fontSize0,orderSerinum,
+                    byte[][] cmdBytes = {printer_init,lineH0,fontSize3,align1, BitMapUtil.getBitmapPrintData(bitmap, 325, 1), nextLine,fontSize1,title2,nextLine,
+                            fontSize3, title3, nextLine, fontSize1,title4,nextLine, lineH1,fontSize1,align1,ESCUtil.setQRsize(8), ESCUtil.setQRCorrectionLevel(48), ESCUtil.cacheQRData(QrCodeData), nextLine, lineH0,fontSize0,orderSerinum,
                             align1,fontSize1,lineH1,testInfo,nextLine,performPrint};
                     try {
                         if((socket == null) || (!socket.isConnected()))

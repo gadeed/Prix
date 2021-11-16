@@ -12,7 +12,7 @@ import com.flexural.developers.prixapp.R;
 public class RemitMoneyActivity extends AppCompatActivity {
 
     private ImageView mButtonBack;
-    private LinearLayout mButtonMamaMoney, mButtonHelloPaisa, mButtonEcoCash;
+    private LinearLayout mButtonMamaMoney, mButtonHelloPaisa, mButtonEcoCash, mButtonRemitMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class RemitMoneyActivity extends AppCompatActivity {
         mButtonMamaMoney = findViewById(R.id.button_mama_money);
         mButtonEcoCash = findViewById(R.id.button_ecocash);
         mButtonHelloPaisa = findViewById(R.id.button_hello_paisa);
+        mButtonRemitMoney = findViewById(R.id.button_remit_money);
 
         init();
 
@@ -40,6 +41,10 @@ public class RemitMoneyActivity extends AppCompatActivity {
         });
 
         mButtonHelloPaisa.setOnClickListener(v -> {
+            startActivity(new Intent(this, ReferenceActivity.class));
+        });
+
+        mButtonRemitMoney.setOnClickListener(v -> {
             startActivity(new Intent(this, ReferenceActivity.class));
         });
 

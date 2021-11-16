@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="115dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textSize="17dp"
+            android:id="@+id/electricity_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:paddingLeft="8dp"
+            android:paddingTop="32dp"
+            android:text="R5"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:paddingBottom="32dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:fontFamily="@font/montserrat_regular"
+            android:id="@+id/description" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

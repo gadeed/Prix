@@ -26,11 +26,13 @@ import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
 
 public class ProfileActivity extends AppCompatActivity {
     private LinearLayout mEditProfile, mButtonDevice, mButtonTopup, mButtonTransfer, mButtonSales;
-    private LinearLayout mButtonHelpCenter;
+    private LinearLayout mButtonHelpCenter, mButtonStatement;
     private ImageView mButtonDashboard, mButtonSettings;
-    private TextView mUsername;
+    private TextView mUsername, mMerchantNumber;
 
     private String URL = BASE_URL + "personalInfo.php";
+    private String URL_WALLET = BASE_URL + "merchantWallet.php";
+
     private String shopName;
 
 
@@ -49,6 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
         mButtonHelpCenter = findViewById(R.id.button_help_center);
 
         mUsername = findViewById(R.id.user_name);
+        mMerchantNumber = findViewById(R.id.merchant_number);
+        mButtonStatement = findViewById(R.id.button_statements);
 
         init();
         getData();
@@ -67,14 +71,57 @@ public class ProfileActivity extends AppCompatActivity {
                         String lastName = object.getString("last_name");
                         shopName = object.getString("shop_name");
 
-                        mUsername.setText(firstName + " " + lastName);
+                        mUsername.setText(shopName);
 
-                        mButtonTopup.setOnClickListener(v -> {
-                            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
-                            intent.putExtra("menu", "topup");
-                            intent.putExtra("shopName", shopName);
-                            startActivity(intent);
+                        StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONArray array = new JSONArray(response);
+                                    for (int i = 0; i < array.length(); i++) {
+                                        JSONObject object = array.getJSONObject(i);
+                                        String acc_no = object.getString("acc_no");
+
+                                        mMerchantNumber.setText(acc_no);
+
+                                        mButtonTopup.setOnClickListener(v -> {
+                                            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                                            intent.putExtra("menu", "topup");
+                                            intent.putExtra("shopName", shopName);
+                                            intent.putExtra("mid", acc_no);
+                                            startActivity(intent);
+                                        });
+
+                                        mButtonTransfer.setOnClickListener(v -> {
+                                            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                                            intent.putExtra("menu", "transfer");
+                                            intent.putExtra("shopName", shopName);
+                                            intent.putExtra("mid", acc_no);
+                                            startActivity(intent);
+                                        });
+
+                                        mButtonTransfer.setOnClickListener(v -> {
+                                            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                                            intent.putExtra("menu", "statement");
+                                            intent.putExtra("shopName", shopName);
+                                            intent.putExtra("mid", acc_no);
+                                            startActivity(intent);
+                                        });
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            }
                         });
+                        Volley.newRequestQueue(ProfileActivity.this).add(request);
+
 
                     }
                 } catch (JSONException e) {
@@ -108,13 +155,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         mButtonSettings.setOnClickListener(v -> {
             startActivity(new Intent(this, SettingsActivity.class));
-        });
-
-        mButtonTransfer.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MenuActivity.class);
-            intent.putExtra("menu", "transfer");
-            intent.putExtra("shopName", shopName);
-            startActivity(intent);
         });
 
         mButtonSales.setOnClickListener(v -> {

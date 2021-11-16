@@ -56,8 +56,7 @@ public class RequestActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
 
-    private TextView mButtonAdd;
-    private ImageView mImageSelected;
+    private TextView mMerchantId;
     private EditText mTopUpAmount;
     private Button mButtonRequest;
 
@@ -69,8 +68,7 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
 
-        mButtonAdd = findViewById(R.id.button_add);
-        mImageSelected = findViewById(R.id.image_selected);
+        mMerchantId = findViewById(R.id.merchant_number);
         mTopUpAmount = findViewById(R.id.top_up_amount);
         mButtonRequest = findViewById(R.id.button_request);
 
@@ -80,113 +78,71 @@ public class RequestActivity extends AppCompatActivity {
         topUpAmount = "";
 
         init();
+        receiveIntent();
 
     }
 
-    private void init() {
-        mButtonAdd.setOnClickListener(v -> {
-            ImagePicker.with(this)
-//                    .crop()	    			//Crop image(Optional), Check Customization for more option
-//                    .compress(1024)			//Final image size will be less than 1 MB(Optional)
-//                    .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                    .createIntent((Function1) (new Function1() {
-                        public Object invoke(Object var1) {
-                            this.invoke((Intent) var1);
-                            return Unit.INSTANCE;
-                        }
+    private void receiveIntent() {
+        Intent intent = getIntent();
+        String acc_no = intent.getStringExtra("mid");
 
-                        public final void invoke(@NotNull Intent it) {
-                            Intrinsics.checkNotNullParameter(it, "it");
-                            launcher.launch(it);
+        mMerchantId.setText(acc_no);
+
+        mButtonRequest.setOnClickListener(v -> {
+            topUpAmount = mTopUpAmount.getText().toString().trim();
+
+
+            if (!topUpAmount.equals("") && !acc_no.equals("")) {
+                StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equals("success")) {
+                            Intent intent = new Intent(RequestActivity.this, ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                            Toast.makeText(RequestActivity.this, "Top Up Request Successfully Submitted", Toast.LENGTH_SHORT).show();
+
+
+                        } else if (response.equals("failure")) {
+                            Snackbar.make(findViewById(android.R.id.content), response.toString(), Snackbar.LENGTH_SHORT).show();
+
                         }
-                    }));
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Snackbar.make(findViewById(android.R.id.content), error.toString().trim(), Snackbar.LENGTH_SHORT).show();
+
+                    }
+                }){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> data = new HashMap<>();
+                        data.put("mid", acc_no);
+                        data.put("amount", topUpAmount);
+                        data.put("recved", "0.00");
+                        data.put("charged", "0.00");
+                        data.put("status", "Received");
+                        data.put("remarks", "");
+                        data.put("created", currentDate);
+                        data.put("updated", currentDate);
+                        return data;
+
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(request);
+            } else {
+                Toast.makeText(this, "Fill All Fields", Toast.LENGTH_SHORT).show();
+            }
         });
 
 
     }
 
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            (ActivityResult result) -> {
-        if (result.getResultCode() == RESULT_OK) {
-            Uri uri = result.getData().getData();
-            Glide.with(RequestActivity.this).load(uri).into(mImageSelected);
-
-            mButtonRequest.setOnClickListener(v -> {
-                topUpAmount = mTopUpAmount.getText().toString().trim();
-
-                if (!topUpAmount.equals("") && uri != null) {
-                    StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            if (response.equals("success")) {
-                                Intent intent = new Intent(RequestActivity.this, ProfileActivity.class);
-                                startActivity(intent);
-                                finish();
-
-                            } else if (response.equals("failure")) {
-                                Snackbar.make(findViewById(android.R.id.content), "Invalid Login Id/Password", Snackbar.LENGTH_SHORT).show();
-
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Snackbar.make(findViewById(android.R.id.content), error.toString().trim(), Snackbar.LENGTH_SHORT).show();
-
-                        }
-                    }){
-                        @Nullable
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> data = new HashMap<>();
-                            data.put("mid", "");
-                            data.put("amount", topUpAmount);
-                            data.put("payment_document", String.valueOf(uri));
-                            data.put("status", "Received");
-                            data.put("created", currentDate);
-                            data.put("updated", currentDate);
-                            return data;
-
-                        }
-                    };
-                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                    queue.add(request);
-                } else {
-                    Toast.makeText(this, "Fill All Fields", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        } else if (result.getResultCode() == ImagePicker.RESULT_ERROR) {
-
-        }
-            });
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                Uri selectedImage = data.getData();
-
-                mImageSelected.setImageURI(selectedImage);
-//                Glide.with(RequestActivity.this).load(selectedImage).into(mImageSelected);
-
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        /* ... */
-        boolean requestPermissions = false;
-        String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
-        for(String s : permissions)
-            if(ContextCompat.checkSelfPermission(this, s) != PackageManager.PERMISSION_GRANTED)
-                requestPermissions = true;
-        if(requestPermissions)
-            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
+    private void init() {
 
     }
 }

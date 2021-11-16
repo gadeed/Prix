@@ -51,6 +51,7 @@
                     android:textColor="#175E8C" />
 
                 <TextView
+                    android:id="@+id/merchant_number"
                     android:layout_marginBottom="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,6 +178,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/button_statements"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
