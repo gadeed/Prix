@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.flexural.developers.prixapp.MainActivity;
 import com.flexural.developers.prixapp.R;
+import com.flexural.developers.prixapp.model.Sales;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -100,11 +101,17 @@ public class ProfileActivity extends AppCompatActivity {
                                             startActivity(intent);
                                         });
 
-                                        mButtonTransfer.setOnClickListener(v -> {
+                                        mButtonStatement.setOnClickListener(v -> {
                                             Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
                                             intent.putExtra("menu", "statement");
                                             intent.putExtra("shopName", shopName);
                                             intent.putExtra("mid", acc_no);
+                                            startActivity(intent);
+                                        });
+
+                                        mButtonSales.setOnClickListener(v -> {
+                                            Intent intent = new Intent(ProfileActivity.this, SalesActivity.class);
+                                            intent.putExtra("shopName", shopName);
                                             startActivity(intent);
                                         });
 
@@ -155,12 +162,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         mButtonSettings.setOnClickListener(v -> {
             startActivity(new Intent(this, SettingsActivity.class));
-        });
-
-        mButtonSales.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MenuActivity.class);
-            intent.putExtra("menu", "sales");
-            startActivity(intent);
         });
 
         mButtonHelpCenter.setOnClickListener(v -> {

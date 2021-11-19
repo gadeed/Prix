@@ -1,14 +1,15 @@
 package com.flexural.developers.prixapp.model;
 
 public class Airtime {
-    public String prod_id, pin_no, serial_no, status, expired_date;
+    public String prod_id, pin_no, serial_no, status, expired_date, id;
 
-    public Airtime(String prod_id, String pin_no, String serial_no, String status, String expired_date) {
+    public Airtime(String prod_id, String pin_no, String serial_no, String status, String expired_date, String id) {
         this.prod_id = prod_id;
         this.pin_no = pin_no;
         this.serial_no = serial_no;
         this.status = status;
         this.expired_date = expired_date;
+        this.id = id;
     }
 
     public void setProd_id(String prod_id) {
@@ -39,6 +40,7 @@ public class Airtime {
                 ", serial_no='" + serial_no + '\'' +
                 ", status='" + status + '\'' +
                 ", expired_date='" + expired_date + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.flexural.developers.prixapp.activity;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,15 +16,20 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -30,6 +37,7 @@ import com.flexural.developers.prixapp.MainActivity;
 import com.flexural.developers.prixapp.R;
 import com.flexural.developers.prixapp.adapters.AirtimeAdapter;
 import com.flexural.developers.prixapp.model.Airtime;
+import com.flexural.developers.prixapp.model.AirtimeId;
 import com.flexural.developers.prixapp.utils.BitMapUtil;
 import com.flexural.developers.prixapp.utils.BluetoothUtil;
 import com.flexural.developers.prixapp.utils.ButtonDelayUtils;
@@ -50,7 +58,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
@@ -59,18 +69,25 @@ public class PrinterActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private String prod_id, pin_no, serial_no, av_qty;
+    private String prod_id, pin_no, serial_no, selectedAirtime, acc_no;
+    private int voucherAmount = 1;
 
     private RecyclerView mAirtimeRecycler;
     private List<Airtime> airtimeList;
+    private List<AirtimeId> airtimeIdList;
     private AirtimeAdapter airtimeAdapter;
-    private TextView mAirtimeAmount;
+    private TextView mAirtimeAmount, mVoucherText, mText;
+    private SeekBar mVoucherAmount;
 
     private String URL =  BASE_URL + "airtimeList.php";
     private String URL_QNTY =  BASE_URL + "airtimeQuantity.php";
+    private String NEW_SALES_URL = BASE_URL + "newSales.php";
+    private String URL_WALLET = BASE_URL + "merchantWallet.php";
 
     private String currentDate, currentTime, day;
     private Calendar calendar;
+    private Airtime airtime;
+    private AirtimeId airtimeId;
 
     private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothDevice mBluetoothPrinterDevice = null;
@@ -290,13 +307,19 @@ public class PrinterActivity extends AppCompatActivity {
 
         mAirtimeRecycler = findViewById(R.id.recycler_view);
         mAirtimeAmount = findViewById(R.id.airtime_amount);
+        mVoucherAmount = findViewById(R.id.voucher_amount);
+        mVoucherText = findViewById(R.id.voucher_text);
+        mText = findViewById(R.id.text);
 
         mAirtimeRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         airtimeList = new ArrayList<>();
+        airtimeIdList = new ArrayList<>();
 
         calendar = Calendar.getInstance();
 
+
+        getData();
         innitView();
         receiveIntent();
 
@@ -304,9 +327,36 @@ public class PrinterActivity extends AppCompatActivity {
 
     private void receiveIntent() {
         Intent intent = getIntent();
-        String selectedAirtime = intent.getStringExtra("airtime");
+        selectedAirtime = intent.getStringExtra("airtime");
         mAirtimeAmount.setText("R" + selectedAirtime);
-        getAirtime(selectedAirtime);
+
+        mVoucherAmount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (progress == 0) {
+                    mVoucherText.setText("1");
+                    getAirtime(selectedAirtime, Integer.valueOf(mVoucherText.getText().toString()));
+
+
+                } else {
+                    mVoucherText.setText(String.valueOf(progress));
+                    getAirtime(selectedAirtime, Integer.valueOf(mVoucherText.getText().toString()));
+
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        getAirtime(selectedAirtime, voucherAmount);
 
     }
 
@@ -362,7 +412,7 @@ public class PrinterActivity extends AppCompatActivity {
 //        Volley.newRequestQueue(PrinterActivity.this).add(stringRequest);
 //    }
 
-    private void getAirtime(String selectedAirtime) {
+    private void getAirtime(String selectedAirtime, int voucherAmount) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -376,18 +426,17 @@ public class PrinterActivity extends AppCompatActivity {
                         serial_no = object.getString("serial_no");
                         String status = object.getString("status");
                         String expired_date = object.getString("expired_date");
+                        String id = object.getString("id");
+
 
                         if (prod_id.equals(selectedAirtime) && status.equals("Available")) {
-                            Airtime airtime = new Airtime(prod_id, pin_no, serial_no, status, expired_date);
-                            airtimeList.add(airtime);
+                            airtime = new Airtime(prod_id, pin_no, serial_no, status, expired_date, id);
+                            airtimeId = new AirtimeId(id);
 
-                            btn_printer_test.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if(getPrinterStatus() == PRINTER_NORMAL)
-                                        bluetoothPrinterTest(prod_id, pin_no, serial_no);
-                                }
-                            });
+                            airtimeList.add(airtime);
+                            airtimeIdList.add(airtimeId);
+
+
 
                         }
 
@@ -395,8 +444,31 @@ public class PrinterActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                airtimeAdapter = new AirtimeAdapter(PrinterActivity.this, airtimeList);
+                airtimeAdapter = new AirtimeAdapter(PrinterActivity.this, airtimeList, voucherAmount);
                 mAirtimeRecycler.setAdapter(airtimeAdapter);
+                airtimeAdapter.notifyDataSetChanged();
+
+                btn_printer_test.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(getPrinterStatus() == PRINTER_NORMAL) {
+                            int subLength = airtimeIdList.subList(0, Integer.valueOf(mVoucherText.getText().toString())).size();
+
+                            for (int i = 0; i < subLength; i++) {
+                                bluetoothPrinterTest(prod_id, pin_no, serial_no);
+//                                Toast.makeText(PrinterActivity.this, "How many times: " + i, Toast.LENGTH_SHORT).show();
+//                                mText.setText("Length: " + subLength + "\n" + airtimeList.subList(0, subLength) + "\nPin: " + airtimeList.get(i).id);
+
+                            }
+
+                            Intent intent = new Intent(PrinterActivity.this, PrinterActivity.class);
+                            intent.putExtra("title", "prix");
+                            startActivity(intent);
+
+                        }
+
+                    }
+                });
 
             }
         }, new com.android.volley.Response.ErrorListener() {
@@ -411,8 +483,7 @@ public class PrinterActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         // Log.d(TAG, "activity onResume");
         super.onResume();
         //注册打印机状态接收器
@@ -436,15 +507,13 @@ public class PrinterActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         // Log.d(TAG, "activity onPause");
         super.onPause();
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         // Log.e(TAG, "activity onStop");
         super.onStop();
         unregisterReceiver(IPosPrinterStatusListener);
@@ -452,8 +521,7 @@ public class PrinterActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         // Log.d(TAG, "activity onDestroy");
         super.onDestroy();
         mPrinterHandler.removeCallbacksAndMessages(null);
@@ -473,8 +541,7 @@ public class PrinterActivity extends AppCompatActivity {
         }
     }
 
-    public void print_loop(int flag)
-    {
+    public void print_loop(int flag) {
         switch (flag)
         {
             case MULTI_THREAD_LOOP_PRINT:
@@ -485,8 +552,7 @@ public class PrinterActivity extends AppCompatActivity {
         }
     }
 
-    public void multiThreadPrintTest()
-    {
+    public void multiThreadPrintTest() {
         switch (random.nextInt(16))
         {
             case 0:
@@ -497,8 +563,7 @@ public class PrinterActivity extends AppCompatActivity {
         }
     }
 
-    public void LoadBluetoothPrinter()
-    {
+    public void LoadBluetoothPrinter() {
         // 1: Get BluetoothAdapter
         mBluetoothAdapter = BluetoothUtil.getBluetoothAdapter();
         if(mBluetoothAdapter == null)
@@ -530,8 +595,7 @@ public class PrinterActivity extends AppCompatActivity {
 //        Toast.makeText(getBaseContext(), R.string.get_BluetoothPrinterDevice_success, Toast.LENGTH_LONG).show();
     }
 
-    public int getPrinterStatus()
-    {
+    public int getPrinterStatus() {
         byte[] statusData = new byte[3];
         if(!isBluetoothOpen)
         {
@@ -568,8 +632,7 @@ public class PrinterActivity extends AppCompatActivity {
         return printerStatus;
     }
 
-    private void printerInit()
-    {
+    private void printerInit() {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -593,8 +656,7 @@ public class PrinterActivity extends AppCompatActivity {
         });
     }
 
-    private void bluetoothPrinterTest(String ProdId, String PinNumber, String SerialNumber)
-    {
+    private void bluetoothPrinterTest(String ProdId, String PinNumber, String SerialNumber) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -686,5 +748,67 @@ public class PrinterActivity extends AppCompatActivity {
         });
     }
 
+    private void newSales(String prod_id) {
+        StringRequest request = new StringRequest(Request.Method.POST, NEW_SALES_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equals("success")) {
+                    Toast.makeText(PrinterActivity.this, "Sale Successfully Completed", Toast.LENGTH_SHORT).show();
+
+                } else if (response.equals("failure")) {
+                    Snackbar.make(findViewById(android.R.id.content), response, Snackbar.LENGTH_SHORT).show();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Snackbar.make(findViewById(android.R.id.content), error.toString().trim(), Snackbar.LENGTH_SHORT).show();
+
+            }
+        }){
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data = new HashMap<>();
+                data.put("pid", prod_id);
+                data.put("qty", mVoucherText.getText().toString());
+                data.put("price", String.valueOf(Math.multiplyExact(Integer.valueOf(prod_id), Integer.valueOf(mVoucherText.getText().toString()))));
+                data.put("mid", acc_no);
+                data.put("data", String.valueOf(airtimeIdList.subList(0, Integer.valueOf(mVoucherText.getText().toString()))));
+                return data;
+
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(request);
+
+    }
+
+    private void getData(){
+        StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        acc_no = object.getString("acc_no");
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PrinterActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        Volley.newRequestQueue(PrinterActivity.this).add(request);
+    }
 
 }

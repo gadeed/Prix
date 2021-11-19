@@ -150,34 +150,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/background_outline_gray">
-
-                <ImageView
-                    android:layout_marginLeft="16dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_earnings" />
-
-                <TextView
-                    android:layout_margin="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Earnings"
-                    android:fontFamily="@font/montserrat_semi_bold"
-                    android:textSize="17dp"
-                    android:textColor="#175E8C" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/button_statements"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"

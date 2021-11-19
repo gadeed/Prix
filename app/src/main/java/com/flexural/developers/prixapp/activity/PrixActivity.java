@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -47,11 +48,13 @@ public class PrixActivity extends AppCompatActivity {
 
     private ImageView mTitle, mDropDown, mNetworkLogo, mButtonBack;
     private LinearLayout mButtonMtn, mButtonPrix, mButtonVodacom, mNetworkContainer, mButtonCellC, mButtonTelkom;
-    private TextView mNetworkTitle, mSelectNetwork;
+    private TextView mNetworkTitle, mSelectNetwork, mAvailableBalance;
     private SingleSelectToggleGroup mPrixAirtime, mMtnAirtime, mVodacomAirtime, mCellCAirtime, mTelkomAirtime;
     private RelativeLayout mButtonBuy;
 
     private String prixAirtime;
+    private String URL_WALLET = BASE_URL + "merchantWallet.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,46 +75,56 @@ public class PrixActivity extends AppCompatActivity {
         mCellCAirtime = findViewById(R.id.cellc_airtime);
         mTelkomAirtime = findViewById(R.id.telkom_airtime);
         mButtonBack = findViewById(R.id.button_back);
+        mAvailableBalance = findViewById(R.id.available_balance);
 
         mPrixAirtime.setOnCheckedChangeListener(new SingleSelectToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SingleSelectToggleGroup group, int checkedId) {
 
                 if (checkedId == 1) {
-                    prixAirtime = "10";
+                    prixAirtime = "2";
 
                 } else if (checkedId == 2) {
-                    prixAirtime = "12";
-
-                } else if (checkedId == 3) {
-                    prixAirtime = "15";
-
-                } else if (checkedId == 4) {
-                    prixAirtime = "20";
-
-                } else if (checkedId == 5) {
-                    prixAirtime = "25";
-
-                } else if (checkedId == 6) {
-                    prixAirtime = "29";
-
-                } else if (checkedId == 7) {
-                    prixAirtime = "30";
-
-                } else if (checkedId == 8) {
-                    prixAirtime = "55";
-
-                } else if (checkedId == 9) {
-                    prixAirtime = "60";
-
-                } else {
                     prixAirtime = "5";
 
+                } else if (checkedId == 3) {
+                    prixAirtime = "10";
+
+                } else if (checkedId == 4) {
+                    prixAirtime = "12";
+
+                } else if (checkedId == 5) {
+                    prixAirtime = "15";
+
+                } else if (checkedId == 6) {
+                    prixAirtime = "20";
+
+                } else if (checkedId == 7) {
+                    prixAirtime = "25";
+
+                } else if (checkedId == 8) {
+                    prixAirtime = "29";
+
+                } else if (checkedId == 9) {
+                    prixAirtime = "30";
+
+                } else if (checkedId == 10) {
+                    prixAirtime = "35";
+
+                } else if (checkedId == 11) {
+                    prixAirtime = "55";
+
+                } else {
+                    prixAirtime = "60";
+
                 }
+
+//                Toast.makeText(PrixActivity.this, "Position: " + checkedId, Toast.LENGTH_SHORT).show();
             }
         });
 
         init();
+        loadWallet();
         receiveIntent();
 
     }
@@ -237,6 +250,34 @@ public class PrixActivity extends AppCompatActivity {
         } else {
 
         }
+    }
+
+    private void loadWallet() {
+        StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String walletBalance = object.getString("balance");
+
+                        mAvailableBalance.setText("R" + walletBalance);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PrixActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        Volley.newRequestQueue(PrixActivity.this).add(request);
+
     }
 
 

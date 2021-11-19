@@ -18,10 +18,12 @@ import java.util.List;
 public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHolder> {
     private Context context;
     private List<Airtime> airtimeList;
+    private int voucherAmount;
 
-    public AirtimeAdapter(Context context, List<Airtime> airtimeList) {
+    public AirtimeAdapter(Context context, List<Airtime> airtimeList, int voucherAmount) {
         this.context = context;
         this.airtimeList = airtimeList;
+        this.voucherAmount = voucherAmount;
     }
 
     @NonNull
@@ -40,6 +42,7 @@ public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHold
         holder.mSerialNumber.setText(airtime.serial_no);
         holder.mStatus.setText(airtime.status);
         holder.mExpiredDate.setText(airtime.expired_date);
+        holder.mID.setText(airtime.id);
         
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(context, "Position: " + position, Toast.LENGTH_SHORT).show();
@@ -48,11 +51,18 @@ public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 1;
+//        return airtimeList.size();
+        if (airtimeList.size() == 0) {
+            return 0;
+
+        } else {
+            return voucherAmount;
+
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mPrice, mPinNumber, mSerialNumber, mStatus, mExpiredDate;
+        private TextView mPrice, mPinNumber, mSerialNumber, mStatus, mExpiredDate, mID;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +72,7 @@ public class AirtimeAdapter extends RecyclerView.Adapter<AirtimeAdapter.ViewHold
             mSerialNumber = itemView.findViewById(R.id.serial_number);
             mStatus = itemView.findViewById(R.id.status);
             mExpiredDate = itemView.findViewById(R.id.expired_date);
+            mID = itemView.findViewById(R.id.id);
         }
     }
 }

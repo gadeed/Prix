@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
     private RelativeLayout mButtonLogout;
     private LinearLayout mChangePin, mButtonTermsConditions;
 
-    private String oldPassword, newPassword;
+    private String oldPassword, newPassword, confirmPassword;
     private ProgressDialog progressDialog;
 
     private String URL = BASE_URL + "update.php";
@@ -106,51 +106,60 @@ public class SettingsActivity extends AppCompatActivity {
 
         EditText mOldPassword = dialog.findViewById(R.id.old_password);
         EditText mNewPassword = dialog.findViewById(R.id.input_password);
+        EditText mConfirmPassword = dialog.findViewById(R.id.confirm_password);
         RelativeLayout mChangePassword = dialog.findViewById(R.id.change_password);
 
         mChangePassword.setOnClickListener(v -> {
             oldPassword = mOldPassword.getText().toString().trim();
             newPassword = mNewPassword.getText().toString().trim();
+            confirmPassword = mConfirmPassword.getText().toString().trim();
 
             if (!oldPassword.equals("") && !newPassword.equals("")) {
-                progressDialog.setMessage("Updating PIN...");
-                progressDialog.show();
-                StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (response.equals("success")) {
-                            progressDialog.dismiss();
-                            Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                if (newPassword.equals(confirmPassword)) {
+                    progressDialog.setMessage("Updating PIN...");
+                    progressDialog.show();
+                    StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.equals("success")) {
+                                progressDialog.dismiss();
+                                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
 
-                            Toast.makeText(SettingsActivity.this, "Password change successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SettingsActivity.this, "Password change successful", Toast.LENGTH_SHORT).show();
 
-                        } else if (response.equals("failure")) {
+                            } else if (response.equals("failure")) {
+                                progressDialog.dismiss();
+                                Snackbar.make(findViewById(android.R.id.content), "Invalid PIN", Snackbar.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             progressDialog.dismiss();
-                            Snackbar.make(findViewById(android.R.id.content), "Invalid PIN", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(findViewById(android.R.id.content), error.toString().trim(), Snackbar.LENGTH_SHORT).show();
 
                         }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), error.toString().trim(), Snackbar.LENGTH_SHORT).show();
+                    }){
+                        @Nullable
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> data = new HashMap<>();
+                            data.put("oldPassword", oldPassword);
+                            data.put("newPassword", newPassword);
+                            data.put("confirmPassword", confirmPassword);
+                            return data;
 
-                    }
-                }){
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> data = new HashMap<>();
-                        data.put("password", newPassword);
-                        return data;
+                        }
+                    };
+                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                    queue.add(request);
+                } else {
+                    Toast.makeText(this, "Password Mismatch", Toast.LENGTH_SHORT).show();
+                }
 
-                    }
-                };
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                queue.add(request);
             } else {
                 Toast.makeText(this, "Please Fill All the Fields", Toast.LENGTH_SHORT).show();
             }

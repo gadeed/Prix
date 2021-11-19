@@ -78,9 +78,10 @@ public class AirtimeActivity extends AppCompatActivity {
                         String serial_no = object.getString("serial_no");
                         String status = object.getString("status");
                         String expired_date = object.getString("expired_date");
+                        String id = object.getString("id");
 
                         if (prod_id.equals(selectedAirtime) && status.equals("Available")) {
-                            Airtime airtime = new Airtime(prod_id, pin_no, serial_no, status, expired_date);
+                            Airtime airtime = new Airtime(prod_id, pin_no, serial_no, status, expired_date, id);
                             airtimeList.add(airtime);
 
 //                            showDialog(selectedAirtime);
@@ -91,7 +92,7 @@ public class AirtimeActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                airtimeAdapter = new AirtimeAdapter(AirtimeActivity.this, airtimeList);
+//                airtimeAdapter = new AirtimeAdapter(AirtimeActivity.this, airtimeList);
                 mAirtimeRecycler.setAdapter(airtimeAdapter);
 
             }
