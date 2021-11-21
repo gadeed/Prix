@@ -39,9 +39,9 @@ import java.util.Map;
 
 public class LoginScreen extends AppCompatActivity {
 
-    public static String IP_ADDRESS = "10.200.203.23";
-//    public static String BASE_URL = "http://" + IP_ADDRESS + "/prix/";
-    public static String BASE_URL = "https://prix.co.za/app/";
+    public static String IP_ADDRESS = "10.29.112.20";
+    public static String BASE_URL = "http://" + IP_ADDRESS + "/prix/";
+//    public static String BASE_URL = "https://prix.co.za/app/";
     private String URL = BASE_URL + "login.php";
 
     private ImageView mButtonClose;

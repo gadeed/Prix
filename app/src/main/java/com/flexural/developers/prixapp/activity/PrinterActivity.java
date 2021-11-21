@@ -703,10 +703,12 @@ public class PrinterActivity extends AppCompatActivity {
                     byte[] align0 = ESCUtil.alignMode((byte)0);
                     byte[] align1 = ESCUtil.alignMode((byte)1);
                     byte[] align2 = ESCUtil.alignMode((byte)2);
+                    String price = "R" + selectedAirtime;
                     String heading = "To recharge. Dial";
                     String pin = "*130*7467*" + PinNumber + "#";
                     String scan = "OR Scan the barcode below:";
                     //Make PIN bold
+                    byte[] title1 = price.getBytes("GBK");
                     byte[] title2 = heading.getBytes("GBK");
                     byte[] title3 = pin.getBytes("GBK");
                     byte[] title4 = scan.getBytes("GBK");
@@ -720,7 +722,7 @@ public class PrinterActivity extends AppCompatActivity {
                     byte[] nextLine = ESCUtil.nextLines(2);
                     byte[] performPrint = ESCUtil.performPrintAndFeedPaper((byte)200);
 
-                    byte[][] cmdBytes = {printer_init,lineH0,fontSize3,align1, BitMapUtil.getBitmapPrintData(bitmap, 325, 1), nextLine,fontSize1,title2,nextLine,
+                    byte[][] cmdBytes = {printer_init,lineH0,fontSize3,align1, BitMapUtil.getBitmapPrintData(bitmap, 325, 1), nextLine, fontSize3, title1, nextLine, fontSize1,title2,nextLine,
                             fontSize3, title3, nextLine, fontSize1,title4,nextLine, lineH1,fontSize1,align1,ESCUtil.setQRsize(8), ESCUtil.setQRCorrectionLevel(48), ESCUtil.cacheQRData(QrCodeData), nextLine, lineH0,fontSize0,orderSerinum,
                             align1,fontSize1,lineH1,testInfo,nextLine,performPrint};
                     try {

@@ -61,10 +61,9 @@ public class MenuActivity extends AppCompatActivity  {
     private String URL =  BASE_URL + "statementList.php";
 
     private TextView mSerialNumber, mTitle, mReferenceNumber;
-    private LinearLayout mLayoutDevice, mLayoutTopUp, mLayoutTransfer, mLayoutHelpCenter, mLayoutPrivacy;
+    private LinearLayout mLayoutDevice, mLayoutTopUp, mLayoutHelpCenter, mLayoutPrivacy;
     private LinearLayout mLayoutStatement;
-    private CardView mButtonAddFriend, mShareCode;
-    private RelativeLayout mLayoutSales, mButtonTicket;
+    private RelativeLayout mButtonTicket;
     private ImageView mButtonBack;
     private Button mButtonRequest;
     private PDFView mPdfView;
@@ -82,18 +81,13 @@ public class MenuActivity extends AppCompatActivity  {
 
         mSerialNumber = findViewById(R.id.serial_number);
         mLayoutDevice = findViewById(R.id.layout_device);
-        mButtonAddFriend = findViewById(R.id.button_add_friend);
-        mShareCode = findViewById(R.id.button_qr_code);
         mLayoutTopUp = findViewById(R.id.layout_topup);
-        mLayoutTransfer = findViewById(R.id.layout_transfer);
-        mLayoutSales = findViewById(R.id.layout_sales);
-
         mButtonBack = findViewById(R.id.button_back);
         mTitle = findViewById(R.id.title);
         mLayoutHelpCenter = findViewById(R.id.layout_help_center);
         mButtonTicket = findViewById(R.id.button_ticket);
-
         mButtonRequest = findViewById(R.id.button_request);
+
         mLayoutPrivacy = findViewById(R.id.layout_privacy);
         mReferenceNumber = findViewById(R.id.reference_number);
         mRecyclerStatements = findViewById(R.id.recycler_statements);
@@ -146,25 +140,6 @@ public class MenuActivity extends AppCompatActivity  {
                 startActivity(intent1);
             });
 
-
-        } else if (menu.equals("transfer")) {
-            mLayoutTransfer.setVisibility(View.VISIBLE);
-            mTitle.setText("Transfers");
-
-            mButtonAddFriend.setOnClickListener(v -> {
-                Intent intent1 = new Intent(this, AddFriendActivity.class);
-                startActivity(intent1);
-            });
-
-            mShareCode.setOnClickListener(v -> {
-                mTitle.setText("Share My Code");
-
-                Intent sendIntent = new Intent(MenuActivity.this, ExtraActivity.class);
-                sendIntent.putExtra("extra", "qr_code");
-                sendIntent.putExtra("shopName", shopName);
-                sendIntent.putExtra("mid", acc_no);
-                startActivity(sendIntent);
-            });
 
         } else if (menu.equals("help_center")) {
             mTitle.setText("Help Center");

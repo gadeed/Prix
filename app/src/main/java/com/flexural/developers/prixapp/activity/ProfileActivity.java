@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
                                         });
 
                                         mButtonTransfer.setOnClickListener(v -> {
-                                            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                                            Intent intent = new Intent(ProfileActivity.this, TransferActivity.class);
                                             intent.putExtra("menu", "transfer");
                                             intent.putExtra("shopName", shopName);
                                             intent.putExtra("mid", acc_no);
