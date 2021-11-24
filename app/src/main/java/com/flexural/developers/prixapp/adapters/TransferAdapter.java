@@ -35,13 +35,14 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
     private Context context;
     private List<Transfer> transferList;
     private String URL = BASE_URL + "personalInfo.php";
-    private String mid, walletAcc;
+    private String shopName, walletAcc, currentMid;
 
-    public TransferAdapter(Context context, List<Transfer> transferList, String mid, String walletAcc) {
+    public TransferAdapter(Context context, List<Transfer> transferList, String shopName, String walletAcc, String currentMid) {
         this.context = context;
         this.transferList = transferList;
-        this.mid = mid;
+        this.shopName = shopName;
         this.walletAcc = walletAcc;
+        this.currentMid = currentMid;
     }
 
     @NonNull
@@ -53,17 +54,23 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getShopName(mid);
+        holder.mShopName.setText(shopName);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TransferMoneyActivity.class);
-            intent.putExtra("acc_no_tr", walletAcc);
+            intent.putExtra("mid_tr", walletAcc);
+            intent.putExtra("mid", currentMid);
             context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return transferList.size();
+        if (transferList.size() == 0){
+            return 0;
+        } else {
+            return transferList.size();
+
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -89,7 +96,6 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
 
                             if (mid.equals(id)) {
                                 String shopName = object.getString("shop_name");
-                                mShopName.setText(shopName);
 
                             }
 

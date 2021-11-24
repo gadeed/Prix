@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +32,12 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout mButtonHelpCenter, mButtonStatement;
     private ImageView mButtonDashboard, mButtonSettings;
     private TextView mUsername, mMerchantNumber;
+    private ProgressBar mProgressBar;
 
     private String URL = BASE_URL + "personalInfo.php";
     private String URL_WALLET = BASE_URL + "merchantWallet.php";
 
-    private String shopName;
+    private String shopName, mid;
 
 
     @Override
@@ -54,6 +57,9 @@ public class ProfileActivity extends AppCompatActivity {
         mUsername = findViewById(R.id.user_name);
         mMerchantNumber = findViewById(R.id.merchant_number);
         mButtonStatement = findViewById(R.id.button_statements);
+        mProgressBar = findViewById(R.id.progress_bar);
+
+        mProgressBar.setIndeterminate(true);
 
         init();
         getData();
@@ -82,6 +88,10 @@ public class ProfileActivity extends AppCompatActivity {
                                     for (int i = 0; i < array.length(); i++) {
                                         JSONObject object = array.getJSONObject(i);
                                         String acc_no = object.getString("acc_no");
+                                        mid = object.getString("mid");
+
+                                        mProgressBar.setIndeterminate(false);
+                                        mProgressBar.setVisibility(View.GONE);
 
                                         mMerchantNumber.setText(acc_no);
 
@@ -97,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             Intent intent = new Intent(ProfileActivity.this, TransferActivity.class);
                                             intent.putExtra("menu", "transfer");
                                             intent.putExtra("shopName", shopName);
-                                            intent.putExtra("mid", acc_no);
+                                            intent.putExtra("mid", mid);
                                             startActivity(intent);
                                         });
 
@@ -124,6 +134,8 @@ public class ProfileActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                mProgressBar.setIndeterminate(false);
+                                mProgressBar.setVisibility(View.GONE);
                                 Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                             }
                         });
@@ -139,6 +151,8 @@ public class ProfileActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                mProgressBar.setIndeterminate(false);
+                mProgressBar.setVisibility(View.GONE);
                 Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
         });

@@ -53,15 +53,14 @@ public class TransferMoneyActivity extends AppCompatActivity {
     }
 
     private void receiveIntent() {
-        String accNoTr = getIntent().getStringExtra("acc_no_tr");
+        String midTr = getIntent().getStringExtra("mid_tr");
+        String currentMid = getIntent().getStringExtra("mid");
 
-        getWalletBalance(accNoTr);
-
-        mMerchantID.setText(accNoTr);
+        getWalletBalance(midTr, currentMid);
 
     }
 
-    private void getWalletBalance(String accNoTr){
+    private void getWalletBalance(String midTr, String currentMid){
         StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -69,10 +68,11 @@ public class TransferMoneyActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String acc_no = object.getString("acc_no");
+                        String mid = object.getString("mid");
 
-                        if (acc_no.equals(accNoTr)) {
-                            balance = object.getString("balance");
+                        if (mid.equals(midTr)) {
+                            String accNoTr = object.getString("acc_no");
+                            mMerchantID.setText(accNoTr);
 
                             mButtonPay.setOnClickListener(v -> {
                                 inputAmount = mInputAmount.getText().toString();
@@ -94,6 +94,11 @@ public class TransferMoneyActivity extends AppCompatActivity {
                                     Toast.makeText(TransferMoneyActivity.this, "Please Fill All the Fields", Toast.LENGTH_SHORT).show();
                                 }
                             });
+
+                        }
+
+                        if (mid.equals(currentMid)) {
+                            balance = object.getString("balance");
 
                         }
 

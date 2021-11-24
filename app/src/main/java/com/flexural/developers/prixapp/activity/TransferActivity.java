@@ -29,14 +29,14 @@ import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
 
 public class TransferActivity extends AppCompatActivity {
     private String URL = BASE_URL + "getTransferList.php";
-    private String URL_WALLET = BASE_URL + "merchantWallet.php";
+    private String URL_WALLET = BASE_URL + "personalInfo.php";
 
     private CardView mButtonAddFriend, mShareCode;
     private RecyclerView mRecyclerTransfer;
 
     private List<Transfer> transferList;
     private TransferAdapter transferAdapter;
-    private String mid, walletAccNo;
+    private String shopName, walletAccNo, currentMid;
 
 
     @Override
@@ -56,7 +56,7 @@ public class TransferActivity extends AppCompatActivity {
 
     }
 
-    private void loadData(String currentNo) {
+    private void loadData(String currentMid) {
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -64,15 +64,15 @@ public class TransferActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String accNo = object.getString("acc_no");
+                        String mid = object.getString("mid");
 
-                        if (accNo.equals(currentNo)){
-                            String accNoTr = object.getString("acc_no_tr");
+                        if (mid.equals(currentMid)){
+                            String midTr = object.getString("mid_tr");
 
-                            Transfer transfer = new Transfer(accNo, accNoTr);
+                            Transfer transfer = new Transfer(currentMid, midTr);
                             transferList.add(transfer);
 
-                            getMerchantID(accNoTr);
+                            getShopName(midTr);
                         }
 
 
@@ -94,14 +94,14 @@ public class TransferActivity extends AppCompatActivity {
     private void receiveIntent() {
         Intent intent = getIntent();
         String shopName = intent.getStringExtra("shopName");
-        String acc_no = intent.getStringExtra("mid");
+        currentMid = intent.getStringExtra("mid");
 
-        loadData(acc_no);
-
+        loadData(currentMid);
+//        Toast.makeText(this, currentMid, Toast.LENGTH_SHORT).show();
 
         mButtonAddFriend.setOnClickListener(v -> {
             Intent intent1 = new Intent(this, AddFriendActivity.class);
-            intent1.putExtra("mid", acc_no);
+            intent1.putExtra("mid", currentMid);
             startActivity(intent1);
         });
 
@@ -109,12 +109,12 @@ public class TransferActivity extends AppCompatActivity {
             Intent sendIntent = new Intent(this, ExtraActivity.class);
             sendIntent.putExtra("extra", "qr_code");
             sendIntent.putExtra("shopName", shopName);
-            sendIntent.putExtra("mid", acc_no);
+            sendIntent.putExtra("mid", currentMid);
             startActivity(sendIntent);
         });
     }
 
-    private void getMerchantID(String accNoTr) {
+    private void getShopName(String midTr) {
         StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -122,10 +122,10 @@ public class TransferActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        walletAccNo = object.getString("acc_no");
+                        walletAccNo = object.getString("id");
 
-                        if (accNoTr.equals(walletAccNo)){
-                            mid = object.getString("mid");
+                        if (midTr.equals(walletAccNo)){
+                            shopName = object.getString("shop_name");
 
                         }
 
@@ -134,7 +134,7 @@ public class TransferActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                transferAdapter = new TransferAdapter(TransferActivity.this, transferList, mid, walletAccNo);
+                transferAdapter = new TransferAdapter(TransferActivity.this, transferList, shopName, midTr, currentMid);
                 mRecyclerTransfer.setAdapter(transferAdapter);
                 transferAdapter.notifyDataSetChanged();
 
