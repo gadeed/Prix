@@ -108,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             intent.putExtra("menu", "transfer");
                                             intent.putExtra("shopName", shopName);
                                             intent.putExtra("mid", mid);
+                                            intent.putExtra("acc_no", acc_no);
                                             startActivity(intent);
                                         });
 

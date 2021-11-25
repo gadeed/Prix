@@ -35,14 +35,14 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
     private Context context;
     private List<Transfer> transferList;
     private String URL = BASE_URL + "personalInfo.php";
-    private String shopName, walletAcc, currentMid;
 
-    public TransferAdapter(Context context, List<Transfer> transferList, String shopName, String walletAcc, String currentMid) {
+    public TransferAdapter(Context context, List<Transfer> transferList) {
         this.context = context;
         this.transferList = transferList;
-        this.shopName = shopName;
-        this.walletAcc = walletAcc;
-        this.currentMid = currentMid;
+
+// marka adaporka imaado constructorka adaptorka oo kudhex jiro waxaa loosoo baasay dhowr parameter 
+// transfersList kaliya ayaa muhiima. 
+// shopname,walletAcc iyo currentMid looba baahna marka waad tiri kartaan 
     }
 
     @NonNull
@@ -54,12 +54,29 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.mShopName.setText(shopName);
+
+        Transfer transfer = transferList.get(position);
+        holder.mShopName.setText(transfer.shopName);
+        holder.mAccNo.setText(transfer.shopAccNo);
+        // waxaan kusoo daray 2 daan line ee  hoose oo ah inaan soo qaado shopName iyo accNo 
+        // waana sababta aan uuga maarmay qaybaha aan kor kusheegay file kaan dhexdiisa 
+        
+        // REF1 Transfer model ayuu wacayaa
+
+
+   // halkan ayaan ku muujiyey shopName
+   // NB shopName ka kaliya ayaa muuqanaya liiska saaxiibada ama transferlist 
+   // waan isticmaali karaa accNo markaa ubaahado ileen variablka accNo ayaa ihaya fiiri comentiga korkiisa
+   
+
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TransferMoneyActivity.class);
-            intent.putExtra("mid_tr", walletAcc);
-            intent.putExtra("mid", currentMid);
+            intent.putExtra("current_acc_no", transfer.accNo);
+            intent.putExtra("shop_acc_no", transfer.shopAccNo);
             context.startActivity(intent);
+
+//            Toast.makeText(context, transfer.accNo, Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -74,13 +91,20 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mShopName;
+        private TextView mShopName, mAccNo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mShopName = itemView.findViewById(R.id.shop_name);
+            mAccNo = itemView.findViewById(R.id.acc_no);
 
         }
+        
+        
+        
+        //// methodkaan hoose asagana looma baahna waayo shaqadeena waan qabsanay
+        //kaliya waxaad karabteen inaa 'mid' ga kusoo heshaan shopName ka, taasna waan helnay 
+        // marka uuma baahnin
 
         public void getShopName(String mid){
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new com.android.volley.Response.Listener<String>() {

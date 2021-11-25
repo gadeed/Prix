@@ -1,5 +1,6 @@
 package com.flexural.developers.prixapp.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -23,7 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.flexural.developers.prixapp.activity.LoginScreen.BASE_URL;
 
@@ -36,7 +40,7 @@ public class TransferActivity extends AppCompatActivity {
 
     private List<Transfer> transferList;
     private TransferAdapter transferAdapter;
-    private String shopName, walletAccNo, currentMid;
+    private String shopName, currentAccNo, currentMid, shopAccNo;
 
 
     @Override
@@ -52,31 +56,55 @@ public class TransferActivity extends AppCompatActivity {
 
         transferList = new ArrayList<>();
 
+  // Comments. 1- shaqada file kan halkan ayay kabilaabanaysaa
+  // method kan hoose ayaa lawacayaa, aan raacno.
         receiveIntent();
 
     }
 
-    private void loadData(String currentMid) {
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+    private void loadData(String currentMid, String currentAccNo) {
+        // 4. marka methodkaan la imaado anoo wata currentMid oo ah merchantID ga waxaan waacayaa script-ga ladhoho 'getTransferList.php'
+        // waxaana tuurayaa currentMid ama mid, kadib script-ga wuxuu soo celinayaa json oo ah list of transfers ama dadka asaga saaxiibadiis ah oo uu horay 
+        // u diiwangashaday.
+        // script-gaas xogta uu soo celinayo waa sidan: accNo ka iyo shopName ka 
+        // tusaale haddi 5 qof kuugu jirto liiska transfers ka waxaad arkaysaa 5ta qof shopName kooda iyo  accNo kooda laakiin waxa soo muuqanayo waa shopName ka
+        
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String mid = object.getString("mid");
 
-                        if (mid.equals(currentMid)){
-                            String midTr = object.getString("mid_tr");
+                // waa kuwaan accNo iyo shopnName ka aan kaga hadlay faallada kor ku xusan
+                        shopAccNo = object.getString("accNo");
+                        shopName = object.getString("shopName");
 
-                            Transfer transfer = new Transfer(currentMid, midTr);
-                            transferList.add(transfer);
+        // NB qaybtan hoose oo comment ga saaray looma baahna 
+        
+//                        if (mid.equals(currentMid)){
+//                            String midTr = object.getString("mid_tr");
+//
+//                            Transfer transfer = new Transfer(currentMid, midTr);
+//                            transferList.add(transfer);
+//
+//                            getShopName(midTr);
+//                        }
 
-                            getShopName(midTr);
-                        }
-
-
+                // kadib markaa soo celiyo liiska aan soo sheegay waxaan ku shubayaa ArrayListka hoose oo ladhoho transferList
+                // iyo modelka ladhoho Transer 
+                        Transfer transfer = new Transfer(currentAccNo, shopName, shopAccNo);
+                        transferList.add(transfer);
                     }
+
+                // kadib halkaan ayaa Adaptorka ladhoho TransferAdaper looga dhiibayaa transferList 
+                // waxaynu aadaynaa adaptorka, ila soco
+                
+                    transferAdapter = new TransferAdapter(TransferActivity.this, transferList);
+                    mRecyclerTransfer.setAdapter(transferAdapter);
+                    transferAdapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -87,16 +115,32 @@ public class TransferActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(TransferActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
-        });
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data = new HashMap<>();
+                data.put("mid", currentMid);
+                return data;
+
+            }
+        };
         Volley.newRequestQueue(TransferActivity.this).add(request);
     }
 
     private void receiveIntent() {
+        
+        // 2. marka methodkan la imaado, code ka hoose ee intent-ga ha wuxuu soo aqrinayaa labo qiime oo 
+        // kala ah shopName iyo mid. shopName wa magaca dukaanka merchantiga, mid waa ID-ga merchant-ga tusaale '35' tiro lamabar ah 
+        // NB. mesha aad ka isticmaasheen mid oo lambar ah isticmaala merchantAccNo oo ah 'GHZ35' hadda kadib waayo asaga ayaa fahan ahaan iyo caqli ahaan fudud.
         Intent intent = getIntent();
         String shopName = intent.getStringExtra("shopName");
         currentMid = intent.getStringExtra("mid");
+        currentAccNo = intent.getStringExtra("acc_no");
 
-        loadData(currentMid);
+
+// 3. kadib methodkaas hoose ee loadData ayaa lawacayaa ayadoo loo dhiibayo parameter ah currentMid oo lamabarka 35 camal ah.
+        loadData(currentMid, currentAccNo);
 //        Toast.makeText(this, currentMid, Toast.LENGTH_SHORT).show();
 
         mButtonAddFriend.setOnClickListener(v -> {
@@ -113,39 +157,42 @@ public class TransferActivity extends AppCompatActivity {
             startActivity(sendIntent);
         });
     }
+    
+    // 5. methodkaan looma baahna waayo shaqo dheeraad ah oo aan loobahnayo ayuu qabanayaa
+    // waana laga maarmaa
 
-    private void getShopName(String midTr) {
-        StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray array = new JSONArray(response);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        walletAccNo = object.getString("id");
-
-                        if (midTr.equals(walletAccNo)){
-                            shopName = object.getString("shop_name");
-
-                        }
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                transferAdapter = new TransferAdapter(TransferActivity.this, transferList, shopName, midTr, currentMid);
-                mRecyclerTransfer.setAdapter(transferAdapter);
-                transferAdapter.notifyDataSetChanged();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(TransferActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-        Volley.newRequestQueue(TransferActivity.this).add(request);
-    }
+//    private void getShopName(String midTr) {
+//        StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONArray array = new JSONArray(response);
+//                    for (int i = 0; i < array.length(); i++) {
+//                        JSONObject object = array.getJSONObject(i);
+//                        walletAccNo = object.getString("id");
+//
+//                        if (midTr.equals(walletAccNo)){
+//                            shopName = object.getString("shop_name");
+//
+//                        }
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                transferAdapter = new TransferAdapter(TransferActivity.this, transferList, shopName, midTr, currentMid);
+//                mRecyclerTransfer.setAdapter(transferAdapter);
+//                transferAdapter.notifyDataSetChanged();
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(TransferActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        Volley.newRequestQueue(TransferActivity.this).add(request);
+//    }
 
 }

@@ -53,14 +53,16 @@ public class TransferMoneyActivity extends AppCompatActivity {
     }
 
     private void receiveIntent() {
-        String midTr = getIntent().getStringExtra("mid_tr");
-        String currentMid = getIntent().getStringExtra("mid");
+//        String midTr = getIntent().getStringExtra("mid_tr");
+        String shopAccNo = getIntent().getStringExtra("shop_acc_no");
+        String currentAccNo = getIntent().getStringExtra("current_acc_no");
+        mMerchantID.setText(shopAccNo);
 
-        getWalletBalance(midTr, currentMid);
+        getWalletBalance(currentAccNo);
 
     }
 
-    private void getWalletBalance(String midTr, String currentMid){
+    private void getWalletBalance(String currentAccNo){
         StringRequest request = new StringRequest(Request.Method.GET, URL_WALLET, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -68,11 +70,10 @@ public class TransferMoneyActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String mid = object.getString("mid");
+                        String accNo = object.getString("acc_no");
 
-                        if (mid.equals(midTr)) {
+                        if (accNo.equals(currentAccNo)) {
                             String accNoTr = object.getString("acc_no");
-                            mMerchantID.setText(accNoTr);
 
                             mButtonPay.setOnClickListener(v -> {
                                 inputAmount = mInputAmount.getText().toString();
@@ -97,7 +98,7 @@ public class TransferMoneyActivity extends AppCompatActivity {
 
                         }
 
-                        if (mid.equals(currentMid)) {
+                        if (accNo.equals(currentAccNo)) {
                             balance = object.getString("balance");
 
                         }
